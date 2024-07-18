@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Fri Jul 19 2024 00:18:03 GMT+0800">2024-07-19 00:18:03</span>
+                <span class="datetime" data-updated="Fri Jul 19 2024 01:22:58 GMT+0800">2024-07-19 01:22:58</span>
             </span>
         
 
@@ -194,7 +194,10 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java%E5%90%8E%E7%AB%AF-%E9%9D%A2%E8%AF%95/">Java后端 面试</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java/">Java</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></li>
                         
                     
                 </ul>
@@ -239,7 +242,7 @@
 </ul>
 </li>
 <li><p>提问</p>
-<ol>
+</li>
 <li><p>介绍一下Set和List，说明它们的区别</p>
 </li>
 <li><p>介绍一下HashMap和HashTable的区别（没回答出来，没有接触过HashTable）</p>
@@ -284,25 +287,31 @@
 <td align="center">非快速失败</td>
 </tr>
 </tbody></table>
-<ol start="3">
+<ul>
+<li><ol start="3">
 <li><p>HashMap有序吗？在HashMap的子类中，哪个是有序的？</p>
-<p>无序，LinkedHashMap</p>
+</li>
+<li><p>无序，LinkedHashMap</p>
 </li>
 <li><p>分别介绍一下List和Map的遍历方式</p>
 </li>
 <li><p>Java实现多线程的方式（只知道Thread和线程池）</p>
+<ul>
+<li><p><strong>继承</strong>Thread类，调用start()方法</p>
+</li>
+<li><p><strong>实现</strong>Runnable接口，并实例化之来构造Thread实例，在通过Thread实例的start()方法</p>
+</li>
+<li><p>继承Callable接口</p>
+</li>
+<li><p>线程池</p>
+</li>
+</ul>
+</li>
+<li><p>解释下线程进程区别（只回答了进程大线程小，一个进程拥有多个线程）</p>
 </li>
 </ol>
-<ul>
-<li><strong>继承</strong>Thread类，调用start()方法</li>
-<li><strong>实现</strong>Runnable接口，并实例化之来构造Thread实例，在通过Thread实例的start()方法</li>
+</li>
 </ul>
-<pre><code>+ 继承Callable接口
-
- + 线程池
-</code></pre>
-<ol start="6">
-<li><p>解释下线程进程区别（只回答了进程大线程小，一个进程拥有多个线程）</p>
 <table>
 <thead>
 <tr>
@@ -342,17 +351,16 @@
 <td>线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</td>
 </tr>
 </tbody></table>
-</li>
-<li><p>用过什么数据库（MySQL，ORACLE，SQLServer，Redis，MongoDB），简单介绍下Redis</p>
-</li>
-<li><p>知道哪些排序算法（冒泡，堆，桶，快排，分治），选一个解释一下</p>
-</li>
-<li><p>SpringBoot的拦截器用过吗？具体怎么实现？（实在记不得具体实现了）</p>
-</li>
+<ul>
+<li><ol start="8">
+<li>用过什么数据库（MySQL，ORACLE，SQLServer，Redis，MongoDB），简单介绍下Redis</li>
+<li>知道哪些排序算法（冒泡，堆，桶，快排，分治），选一个解释一下</li>
+<li>SpringBoot的拦截器用过吗？具体怎么实现？（实在记不得具体实现了）</li>
 </ol>
 </li>
-</ol>
+</ul>
 <p><strong>总结：</strong>难度不大，时间较短，但自己没有准备充分，有点紧张，面试感觉不好</p>
+<hr>
 
                     
                 </div>
@@ -365,7 +373,11 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java%E5%90%8E%E7%AB%AF-%E9%9D%A2%E8%AF%95/">Java后端 面试</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java/">Java</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
                                     </li>
                                 
                             </ul>
