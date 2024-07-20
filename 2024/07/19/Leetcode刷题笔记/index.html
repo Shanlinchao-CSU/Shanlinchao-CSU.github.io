@@ -9,7 +9,7 @@
     
     <title>
         
-            实习面试记录 |
+            Leetcode刷题笔记 |
         
         Keep Theme
     </title>
@@ -151,7 +151,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        实习面试记录
+                        Leetcode刷题笔记
                     </div>
                 
 
@@ -179,12 +179,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-07-18 23:13:36</span>
+                <span class="datetime">2024-07-19 20:38:40</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sat Jul 20 2024 12:24:27 GMT+0800">2024-07-20 12:24:27</span>
+                <span class="datetime" data-updated="Fri Jul 19 2024 23:02:40 GMT+0800">2024-07-19 23:02:40</span>
             </span>
         
 
@@ -194,10 +194,13 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java/">Java</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Leetcode/">Leetcode</a></li>
                         
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li>
                         
                     
                 </ul>
@@ -222,146 +225,7 @@
                     
 
                     
-                         <!-- toc -->
-
-<ul>
-<li><a href="#momenta">Momenta</a><ul>
-<li><a href="#java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2">Java后端开发（一面）</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-<h1><span id="momenta">Momenta</span></h1><h3><span id="java后端开发一面">Java后端开发（一面）</span></h3><p><strong>流程：</strong></p>
-<ol>
-<li><p>自我介绍</p>
-</li>
-<li><p>讲解项目</p>
-<ul>
-<li>这里因为我第一个RPC项目复习的不是很充分，整体讲了非常久，且讲解过程中逻辑混乱，条理不清晰。虽然说该提到的要点都提到了，但是被面试官指出<strong>需要精简，否则面试官很难提取到介绍中的重点</strong></li>
-</ul>
-</li>
-<li><p>提问</p>
-</li>
-<li><p>介绍一下Set和List，说明它们的区别</p>
-</li>
-<li><p>介绍一下HashMap和HashTable的区别</p>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">HashMap</th>
-<th align="center">HashTable</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">线程安全</td>
-<td align="center">否</td>
-<td align="center">是</td>
-</tr>
-<tr>
-<td align="center">效率</td>
-<td align="center">高</td>
-<td align="center">低</td>
-</tr>
-<tr>
-<td align="center">实现</td>
-<td align="center">继承AbstractMap</td>
-<td align="center">继承Dictionary</td>
-</tr>
-<tr>
-<td align="center">NULL</td>
-<td align="center">可以用NULL作为键值</td>
-<td align="center">不可以使用NULL作为键值</td>
-</tr>
-<tr>
-<td align="center">扩容</td>
-<td align="center">初始容量为16</td>
-<td align="center">初始容量为11</td>
-</tr>
-<tr>
-<td align="center">迭代器容错</td>
-<td align="center">快速失败</td>
-<td align="center">非快速失败</td>
-</tr>
-</tbody></table>
-<ul>
-<li><ol start="3">
-<li><p>HashMap有序吗？在HashMap的子类中，哪个是有序的？</p>
-</li>
-<li><p>无序，LinkedHashMap</p>
-</li>
-<li><p>分别介绍一下List和Map的遍历方式</p>
-</li>
-<li><p>Java实现多线程的方式</p>
-<ul>
-<li><p><strong>继承</strong>Thread类，调用start()方法</p>
-</li>
-<li><p><strong>实现</strong>Runnable接口，并实例化之来构造Thread实例，在通过Thread实例的start()方法</p>
-</li>
-<li><p>继承Callable接口</p>
-</li>
-<li><p>线程池</p>
-</li>
-</ul>
-</li>
-<li><p>解释下线程进程区别</p>
-</li>
-</ol>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>进程</th>
-<th>线程</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>根本区别</td>
-<td>操作系统资源分配基本单位</td>
-<td>处理器任务调度和执行的基本单位</td>
-</tr>
-<tr>
-<td>资源开销</td>
-<td>每个进程都有独立的代码和数据空间，程序之间的切换会有较大的开销</td>
-<td>同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器，线程之间切换的开销小</td>
-</tr>
-<tr>
-<td>包含关系</td>
-<td>一个进程可以包含多个线程</td>
-<td>&#x2F;</td>
-</tr>
-<tr>
-<td>内存分配</td>
-<td>地址空间和资源相互独立</td>
-<td>同进程的线程共享本进程的地址空间和资源</td>
-</tr>
-<tr>
-<td>影响关系</td>
-<td>崩溃后，在保护模式下不会对其它进程影响</td>
-<td>崩溃后，整个进程都崩溃</td>
-</tr>
-<tr>
-<td>执行过程</td>
-<td>每个独立的进程有程序运行的入口、顺序执行序列和程序出口</td>
-<td>线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</td>
-</tr>
-</tbody></table>
-<ul>
-<li><ol start="8">
-<li>用过什么数据库（MySQL，ORACLE，SQLServer，Redis，MongoDB），简单介绍下Redis</li>
-<li>知道哪些排序算法（冒泡，堆，桶，快排，分治），选一个解释一下</li>
-<li>SpringBoot的拦截器用过吗？具体怎么实现？</li>
-</ol>
-</li>
-</ul>
-<p><strong>总结：</strong>难度不大，时间较短，面试之前有点紧张，自我感觉不满意</p>
-<hr>
-
+                         
                     
                 </div>
 
@@ -373,11 +237,15 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java/">Java</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Leetcode/">Leetcode</a>
                                     </li>
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
                                     </li>
                                 
                             </ul>
@@ -393,31 +261,15 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2024/07/19/RPC%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"
-                                   title="RPC框架开发笔记"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">RPC框架开发笔记</span>
-                                        <span class="post-nav-item">Prev posts</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/07/SpringBoot%E6%9D%82%E8%AE%B0/"
-                                   title="SpringBoot杂记"
+                                   href="/2024/07/19/RPC%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"
+                                   title="RPC框架开发笔记"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">SpringBoot杂记</span>
+                                        <span class="post-nav-title-item text-ellipsis">RPC框架开发笔记</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
