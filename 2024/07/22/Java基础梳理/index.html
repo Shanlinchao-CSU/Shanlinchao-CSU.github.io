@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Jul 23 2024 13:54:38 GMT+0800">2024-07-23 13:54:38</span>
+                <span class="datetime" data-updated="Tue Jul 23 2024 13:57:22 GMT+0800">2024-07-23 13:57:22</span>
             </span>
         
 
@@ -327,7 +327,14 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; iterator = map.entrySet().iterator();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>For Each</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet())</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> **lambda表达式**</span><br><span class="line"></span><br><span class="line">   ```java</span><br><span class="line">   map.forEach((key, value) -&gt; &#123;</span><br><span class="line">               System.out.println(key);</span><br><span class="line">               System.out.println(value);</span><br><span class="line">           &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>lambda表达式</strong></p>
+<pre><code class="java">map.forEach((key, value) -&gt; &#123;
+            System.out.println(key);
+            System.out.println(value);
+        &#125;);
+</code></pre>
 </li>
 <li><p><strong>Stream</strong></p>
 <pre><code class="java">map.entrySet().stream().forEach((entry) -&gt; &#123;
