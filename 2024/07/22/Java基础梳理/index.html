@@ -9,7 +9,7 @@
     
     <title>
         
-            Leetcode刷题笔记 |
+            Java基础梳理 |
         
         Keep Theme
     </title>
@@ -151,7 +151,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Leetcode刷题笔记
+                        Java基础梳理
                     </div>
                 
 
@@ -179,12 +179,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-07-19 20:38:40</span>
+                <span class="datetime">2024-07-22 14:05:14</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Fri Jul 19 2024 23:02:40 GMT+0800">2024-07-19 23:02:40</span>
+                <span class="datetime" data-updated="Tue Jul 23 2024 13:49:13 GMT+0800">2024-07-23 13:49:13</span>
             </span>
         
 
@@ -194,13 +194,7 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Leetcode/">Leetcode</a></li>
-                        
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E7%AE%97%E6%B3%95/">算法</a></li>
-                        
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java/">Java</a></li>
                         
                     
                 </ul>
@@ -225,7 +219,125 @@
                     
 
                     
-                         
+                         <!-- toc -->
+
+<ul>
+<li><a href="#%E4%B8%80-java%E9%9B%86%E5%90%88">一、Java集合</a><ul>
+<li><a href="#11-collection%E6%8E%A5%E5%8F%A3">1.1 Collection接口</a></li>
+<li><a href="#12-map%E6%8E%A5%E5%8F%A3">1.2 Map接口</a></li>
+<li><a href="#13-%E9%9B%B6%E7%A2%8E%E7%9F%A5%E8%AF%86%E7%82%B9">1.3 零碎知识点</a><ul>
+<li><a href="#131-arraylist%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6">1.3.1 ArrayList扩容机制</a></li>
+<li><a href="#132-comparable%E5%92%8Ccomparator">1.3.2 Comparable和Comparator</a></li>
+<li><a href="#133-queue%E5%92%8Cdeque">1.3.3 Queue和Deque</a></li>
+<li><a href="#134-arraydeque%E5%92%8Clinkedlist">1.3.4 ArrayDeque和LinkedList</a></li>
+<li><a href="#135-hashmap%E5%92%8Ctreemap">1.3.5 HashMap和TreeMap</a></li>
+<li><a href="#136-%E4%B8%BA%E4%BD%95hashmap%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6%E4%B8%80%E5%AE%9A%E8%A6%812%E7%9A%84n%E6%AC%A1%E6%96%B9">1.3.6 为何HashMap数组长度一定要2的n次方？</a></li>
+<li><a href="#137-hashmap%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8">1.3.7 HashMap的线程不安全</a></li>
+<li><a href="#138-hashmap%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F">1.3.8 HashMap的遍历方式</a></li>
+<li><a href="#139-concurrenthashmap">1.3.9 ConcurrentHashMap</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C-%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B">二、线程和进程</a></li>
+</ul>
+<!-- tocstop -->
+
+<h1><span id="一-java集合">一、Java集合</span></h1><h2><span id="11-collection接口">1.1 Collection接口</span></h2><ul>
+<li><strong>List</strong><ul>
+<li><strong>ArrayList：</strong>底层结构为数组，可以动态扩容</li>
+<li><strong>LinkedList：</strong>底层结构为链表，内存空间不连续，因此不支持快速随机访问<ul>
+<li>ArrayList&amp;&amp;LinkedList：ArrayList由数组实现，随机访问快，但插入删除效率较低；LinkedList相反</li>
+</ul>
+</li>
+<li><strong>Vector</strong>：List的古老实现，线程安全</li>
+</ul>
+</li>
+<li><strong>Set</strong><ul>
+<li><strong>HashSet：</strong>底层就是HashMap，key存数值，value存固定值。元素无序且唯一</li>
+<li><strong>LinkedHashSet：</strong>底层就是LinkedHashMap，元素有序且唯一</li>
+<li><strong>TreeSet：</strong>底层采用红黑树实现，元素有序且唯一</li>
+</ul>
+</li>
+<li><strong>Queue</strong><ul>
+<li><strong>PriorityQueue：</strong>优先队列，堆实现</li>
+<li><strong>DelayQueue：</strong>延迟队列，队列中元素需实现Delayed接口，且按过期时间排序。越快过期的元素越靠队头；支持阻塞获取元素</li>
+<li><strong>ArrayDeque：</strong>双端队列，两端都允许插入弹出</li>
+</ul>
+</li>
+</ul>
+<h2><span id="12-map接口">1.2 Map接口</span></h2><ul>
+<li><strong>Map</strong><ul>
+<li><strong>HashMap：</strong>数组+链表&#x2F;红黑树</li>
+<li><strong>LinkedHashMap：</strong>HashMap+双向链表，在HashMap的基础上维护了键值对的顺序</li>
+<li><strong>HashTable：</strong>数组+链表<ul>
+<li>HashMap&amp;&amp;HashTable：<ol>
+<li>HashMap线程不安全，HashTable线程安全</li>
+<li>HashMap效率高，HashTable效率低</li>
+<li>HashMap可接受NULL键值，HashTable不可接受</li>
+<li>HashMap继承AbstractMap，HashTable继承Dictionary</li>
+<li>HashMap底层数组初始容量16，每次扩容容量为2n，若指定容量，则初始容量会是2的幂；HashTable的是11，每次扩容容量为2n+1，若指定容量，初始容量就是指定的</li>
+<li>HashMap对哈希值高位低位进行了混合扰动以减少冲突，而HashTable直接使用键的hashCode()值</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><strong>TreeMap：</strong>红黑树</li>
+</ul>
+</li>
+</ul>
+<h2><span id="13-零碎知识点">1.3 零碎知识点</span></h2><h3><span id="131-arraylist扩容机制">1.3.1 ArrayList扩容机制</span></h3><p><strong>扩容可分为两种情况：</strong></p>
+<ul>
+<li><p><strong>当ArrayList的容量为0时，此时添加元素的话，需要扩容，三种构造方法创建的ArrayList在扩容时略有不同：</strong></p>
+<ol>
+<li>无参构造，创建ArrayList后容量为0，添加第一个元素后，容量变为10，此后若需要扩容，则正常扩容</li>
+<li>传容量构造，当参数为0时，创建ArrayList后容量为0，添加第一个元素后，容量为1，此时ArrayList是满的，下次添加元素时需正常扩容。</li>
+<li>传列表构造，当列表为空时，创建ArrayList后容量为0，添加第一个元素后，容量为1，此时ArrayList是满的，下次添加元素时需正常扩容</li>
+</ol>
+</li>
+<li><p><strong>当ArrayList的容量大于0，并且ArrayList是满的时，此时添加元素的话，进行正常扩容，每次扩容到原来的1.5倍</strong></p>
+</li>
+</ul>
+<h3><span id="132-comparable和comparator">1.3.2 Comparable和Comparator</span></h3><ol>
+<li>Comparable表示“能够比较”，一般自定义的，需要实现比较的类会实现该接口，在自定义类内部实现比较具体逻辑；Comparator是一个比较器，用于在外部排序方法对某个类进行比较</li>
+<li>实现Comparable需要实现compareTo方法；实现Comparator需要实现compare方法</li>
+</ol>
+<h3><span id="133-queue和deque">1.3.3 Queue和Deque</span></h3><p>Queue是单端队列，而Deque是双端队列，两头都可以插入弹出</p>
+<h3><span id="134-arraydeque和linkedlist">1.3.4 ArrayDeque和LinkedList</span></h3><p>这俩都实现了Deque接口，但：</p>
+<ol>
+<li><strong>底层实现不同：</strong>前者使用数组+双指针实现，后者使用链表实现</li>
+<li>前者不支持NULL，但后者支持</li>
+<li>前者效率比后者高</li>
+</ol>
+<h3><span id="135-hashmap和treemap">1.3.5 HashMap和TreeMap</span></h3><p>TreeMap额外继承了NavigableMap和SortedMap接口</p>
+<p>前者保证了TreeMap对元素的搜索能力</p>
+<p>后者保证了TreeMap对元素的排序能力</p>
+<h3><span id="136-为何hashmap数组长度一定要2的n次方">1.3.6 为何HashMap数组长度一定要2的n次方？</span></h3><p>因为hash%length &#x3D;&#x3D; hash&amp;(length-1)的前提是 length 是 2 的 n 次方，length为2的n次方之后，取余操作就可用位运算代替，速度更快</p>
+<p><strong>原理：</strong>假设length&#x3D;2^n，那么hash&#x2F;length等价于hash除以n个2，也就是将hash向右移动n位，所以取余的结果就是被移掉的n位，也就是hash的低n位，hash&amp;(length-1)就是计算这n位的</p>
+<h3><span id="137-hashmap的线程不安全">1.3.7 HashMap的线程不安全</span></h3><ul>
+<li><p>死循环</p>
+<p>JDK1.7及以前，由于链表采用头插法，多线程环境下可能导致指针错误，导致死循环；但JDK1.8及以后改为尾插法，问题不存在</p>
+</li>
+<li><p>数据覆盖</p>
+<p>这个是一直有的问题，一个线程可能把另一个线程的数据覆盖</p>
+</li>
+</ul>
+<h3><span id="138-hashmap的遍历方式">1.3.8 HashMap的遍历方式</span></h3><ol>
+<li><p><strong>迭代器</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; iterator = map.entrySet().iterator();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>For Each</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   for (Map.Entry&lt;Integer, String&gt; entry : map.entrySet())</span><br><span class="line"></span><br><span class="line">3. **lambda表达式**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>map.forEach((key, value) -&gt; {<br>        System.out.println(key);<br>        System.out.println(value);<br>    });</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. **Stream**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>map.entrySet().stream().forEach((entry) -&gt; {<br>        System.out.println(entry.getKey());<br>        System.out.println(entry.getValue());<br>    });<br>&#x2F;&#x2F; 多线程<br>map.entrySet().parallelStream().forEach((entry) -&gt; {<br>        System.out.println(entry.getKey());<br>        System.out.println(entry.getValue());<br>    });</p>
+</li>
+</ol>
+<h3><span id="139-concurrenthashmap">1.3.9 ConcurrentHashMap</span></h3><p><img src="/assets/Java%E5%9F%BA%E7%A1%80%E6%A2%B3%E7%90%86/java8_concurrenthashmap.png" alt="Java8 ConcurrentHashMap 存储结构"></p>
+<p>如图是JDK1.8以后，ConcurrentHashMap的底层原理</p>
+<p>相对应的，JDK1.7及之前的实现，相当于把多个Node划分为一组，对组加锁</p>
+<p>因此1.8之后加锁粒度更细，效率更高</p>
+<h1><span id="二-线程和进程">二、线程和进程</span></h1>
                     
                 </div>
 
@@ -237,15 +349,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Leetcode/">Leetcode</a>
-                                    </li>
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
-                                    </li>
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java/">Java</a>
                                     </li>
                                 
                             </ul>
@@ -261,31 +365,15 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2024/07/22/Java%E5%9F%BA%E7%A1%80%E6%A2%B3%E7%90%86/"
-                                   title="Java基础梳理"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Java基础梳理</span>
-                                        <span class="post-nav-item">Prev posts</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/19/RPC%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"
-                                   title="RPC框架开发笔记"
+                                   href="/2024/07/19/Leetcode%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"
+                                   title="Leetcode刷题笔记"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">RPC框架开发笔记</span>
+                                        <span class="post-nav-title-item text-ellipsis">Leetcode刷题笔记</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
