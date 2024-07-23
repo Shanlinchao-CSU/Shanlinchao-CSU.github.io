@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Jul 23 2024 13:57:22 GMT+0800">2024-07-23 13:57:22</span>
+                <span class="datetime" data-updated="Tue Jul 23 2024 16:00:52 GMT+0800">2024-07-23 16:00:52</span>
             </span>
         
 
@@ -239,7 +239,23 @@
 </li>
 </ul>
 </li>
-<li><a href="#%E4%BA%8C-%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B">二、线程和进程</a></li>
+<li><a href="#%E4%BA%8C-%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B">二、线程和进程</a><ul>
+<li><a href="#11-%E5%AE%9A%E4%B9%89%E5%92%8C%E5%8C%BA%E5%88%AB">1.1 定义和区别</a></li>
+<li><a href="#12-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B">1.2 线程模型</a></li>
+<li><a href="#13-%E7%BA%BF%E7%A8%8B%E7%8B%AC%E6%9C%89%E4%B8%89%E8%A6%81%E7%B4%A0%E5%8F%8A%E5%BF%85%E8%A6%81%E6%80%A7">1.3 线程独有三要素及必要性</a></li>
+<li><a href="#14-%E5%A0%86%E5%8C%BA%E5%92%8C%E6%96%B9%E6%B3%95%E5%8C%BA">1.4 堆区和方法区</a></li>
+<li><a href="#15-%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B">1.5 创建线程</a></li>
+<li><a href="#16-%E7%BA%BF%E7%A8%8B%E5%85%AD%E7%8A%B6%E6%80%81">1.6 线程六状态</a></li>
+<li><a href="#17-%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8thread%E7%9A%84run%E6%96%B9%E6%B3%95">1.7 直接调用Thread的run方法</a></li>
+<li><a href="#18-%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C">1.8 并发和并行</a></li>
+<li><a href="#19-%E6%AD%BB%E9%94%81">1.9 死锁</a><ul>
+<li><a href="#191-%E6%AD%BB%E9%94%81%E5%BD%A2%E6%88%904%E6%9D%A1%E4%BB%B6">1.9.1 死锁形成4条件</a></li>
+<li><a href="#192-%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2">1.9.2 死锁预防</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E5%AE%83%E9%97%AE%E9%A2%98">其它问题</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
@@ -353,7 +369,56 @@ map.entrySet().parallelStream().forEach((entry) -&gt; &#123;
 <p>如图是JDK1.8以后，ConcurrentHashMap的底层原理</p>
 <p>相对应的，JDK1.7及之前的实现，相当于把多个Node划分为一组，对组加锁</p>
 <p>因此1.8之后加锁粒度更细，效率更高</p>
-<h1><span id="二-线程和进程">二、线程和进程</span></h1>
+<h1><span id="二-线程和进程">二、线程和进程</span></h1><h2><span id="11-定义和区别">1.1 定义和区别</span></h2><p><strong>进程：</strong>进程是程序的一次执行过程，是系统运行程序的基本单位，是动态的。进程间是相互独立的</p>
+<p><strong>线程：</strong>类似于进程，但比进程更小。一个进程在执行过程中可以产生多个线程。多个线程共享堆和方法区资源，但独占自己的程序计数器、虚拟机栈和本地方法栈。线程切换消耗的资源远小于进程切换消耗的资源。线程间可能存在相互影响</p>
+<h2><span id="12-线程模型">1.2 线程模型</span></h2><ol>
+<li>一对一</li>
+<li>一对多</li>
+<li>多对一</li>
+</ol>
+<h2><span id="13-线程独有三要素及必要性">1.3 线程独有三要素及必要性</span></h2><p><strong>程序计数器：</strong>为了保证线程切换后能恢复到原来的执行位置</p>
+<p><strong>虚拟机栈&#x2F;本地方法栈：</strong>为了保证线程中局部变量不被别的线程访问到</p>
+<h2><span id="14-堆区和方法区">1.4 堆区和方法区</span></h2><p><strong>堆区：</strong>存放新创建的对象</p>
+<p><strong>方法区：</strong>存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据</p>
+<h2><span id="15-创建线程">1.5 创建线程</span></h2><ol>
+<li><p>继承Thread并重写run方法</p>
+</li>
+<li><p>实现Runnable接口并重写run方法</p>
+</li>
+<li><p>实现Callable接口并重写run方法（这种方法可以拿到线程执行返回值）</p>
+</li>
+<li><p>ExecutorService线程池</p>
+</li>
+</ol>
+<h2><span id="16-线程六状态">1.6 线程六状态</span></h2><ol>
+<li>初始状态</li>
+<li>运行状态</li>
+<li>阻塞状态</li>
+<li>等待状态</li>
+<li>超时等待状态</li>
+<li>终止状态</li>
+</ol>
+<h2><span id="17-直接调用thread的run方法">1.7 直接调用Thread的run方法</span></h2><p>不可直接调用，而是应该调用start方法</p>
+<p>start方法会启动一个线程，并使它进入就绪状态，之后当分配到时间片时就自动运行run方法</p>
+<p>但如果直接调用run方法，就相当于main线程里面调用的一个普通方法，不是新线程了</p>
+<h2><span id="18-并发和并行">1.8 并发和并行</span></h2><p><strong>并发：</strong>两个及两个以上的作业在同一<strong>时间段</strong>内执行</p>
+<p><strong>并行：</strong>两个及两个以上的作业在同一<strong>时刻</strong>内执行</p>
+<h2><span id="19-死锁">1.9 死锁</span></h2><h3><span id="191-死锁形成4条件">1.9.1 死锁形成4条件</span></h3><ol>
+<li>互斥条件：该资源任意一个时刻只由一个线程占用</li>
+<li>请求与保持条件：一个线程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不剥夺条件:线程已获得的资源在未使用完之前不能被其他线程强行剥夺，只有自己使用完毕后才释放资源。</li>
+<li>循环等待条件:若干线程之间形成一种头尾相接的循环等待资源关系。</li>
+</ol>
+<h3><span id="192-死锁预防">1.9.2 死锁预防</span></h3><ol>
+<li>破坏申请并占有：一次性资源分配</li>
+<li>破坏不可剥夺：线程申请不到资源时，可以释放它已占有的资源</li>
+<li>破坏循环等待：给资源标顺序，按序申请分配资源，逆序释放资源</li>
+</ol>
+<h2><span id="其它问题">其它问题</span></h2><ol>
+<li>线程退出CPU的四种情况</li>
+<li>sleep和wait方法</li>
+</ol>
+
                     
                 </div>
 
