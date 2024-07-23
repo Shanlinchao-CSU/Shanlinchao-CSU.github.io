@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Jul 23 2024 13:49:13 GMT+0800">2024-07-23 13:49:13</span>
+                <span class="datetime" data-updated="Tue Jul 23 2024 13:54:38 GMT+0800">2024-07-23 13:54:38</span>
             </span>
         
 
@@ -327,10 +327,19 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Iterator&lt;Map.Entry&lt;Integer, String&gt;&gt; iterator = map.entrySet().iterator();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>For Each</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   for (Map.Entry&lt;Integer, String&gt; entry : map.entrySet())</span><br><span class="line"></span><br><span class="line">3. **lambda表达式**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>map.forEach((key, value) -&gt; {<br>        System.out.println(key);<br>        System.out.println(value);<br>    });</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. **Stream**</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>map.entrySet().stream().forEach((entry) -&gt; {<br>        System.out.println(entry.getKey());<br>        System.out.println(entry.getValue());<br>    });<br>&#x2F;&#x2F; 多线程<br>map.entrySet().parallelStream().forEach((entry) -&gt; {<br>        System.out.println(entry.getKey());<br>        System.out.println(entry.getValue());<br>    });</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet())</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> **lambda表达式**</span><br><span class="line"></span><br><span class="line">   ```java</span><br><span class="line">   map.forEach((key, value) -&gt; &#123;</span><br><span class="line">               System.out.println(key);</span><br><span class="line">               System.out.println(value);</span><br><span class="line">           &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Stream</strong></p>
+<pre><code class="java">map.entrySet().stream().forEach((entry) -&gt; &#123;
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
+        &#125;);
+// 多线程
+map.entrySet().parallelStream().forEach((entry) -&gt; &#123;
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
+        &#125;);
+</code></pre>
 </li>
 </ol>
 <h3><span id="139-concurrenthashmap">1.3.9 ConcurrentHashMap</span></h3><p><img src="/assets/Java%E5%9F%BA%E7%A1%80%E6%A2%B3%E7%90%86/java8_concurrenthashmap.png" alt="Java8 ConcurrentHashMap 存储结构"></p>
