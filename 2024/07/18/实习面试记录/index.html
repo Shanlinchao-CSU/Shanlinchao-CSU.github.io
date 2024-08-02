@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sat Jul 20 2024 12:24:27 GMT+0800">2024-07-20 12:24:27</span>
+                <span class="datetime" data-updated="Mon Jul 29 2024 15:03:00 GMT+0800">2024-07-29 15:03:00</span>
             </span>
         
 
@@ -229,20 +229,18 @@
 <li><a href="#java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2">Java后端开发（一面）</a></li>
 </ul>
 </li>
+<li><a href="#%E8%85%BE%E8%AE%AF%E9%87%91%E8%9E%8D%E7%A7%91%E6%8A%80">腾讯金融科技</a><ul>
+<li><a href="#java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2-1">Java后端开发（一面）</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%87%E5%BE%97%E6%95%B0%E6%8D%AE">万得数据</a><ul>
+<li><a href="#java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2a">Java后端开发（一面A）</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
-<h1><span id="momenta">Momenta</span></h1><h3><span id="java后端开发一面">Java后端开发（一面）</span></h3><p><strong>流程：</strong></p>
-<ol>
-<li><p>自我介绍</p>
-</li>
-<li><p>讲解项目</p>
-<ul>
-<li>这里因为我第一个RPC项目复习的不是很充分，整体讲了非常久，且讲解过程中逻辑混乱，条理不清晰。虽然说该提到的要点都提到了，但是被面试官指出<strong>需要精简，否则面试官很难提取到介绍中的重点</strong></li>
-</ul>
-</li>
-<li><p>提问</p>
-</li>
+<h1><span id="momenta">Momenta</span></h1><h3><span id="java后端开发一面">Java后端开发（一面）</span></h3><ol>
 <li><p>介绍一下Set和List，说明它们的区别</p>
 </li>
 <li><p>介绍一下HashMap和HashTable的区别</p>
@@ -287,8 +285,7 @@
 <td align="center">非快速失败</td>
 </tr>
 </tbody></table>
-<ul>
-<li><ol start="3">
+<ol start="3">
 <li><p>HashMap有序吗？在HashMap的子类中，哪个是有序的？</p>
 </li>
 <li><p>无序，LinkedHashMap</p>
@@ -310,8 +307,6 @@
 <li><p>解释下线程进程区别</p>
 </li>
 </ol>
-</li>
-</ul>
 <table>
 <thead>
 <tr>
@@ -351,16 +346,73 @@
 <td>线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</td>
 </tr>
 </tbody></table>
-<ul>
-<li><ol start="8">
+<ol start="8">
 <li>用过什么数据库（MySQL，ORACLE，SQLServer，Redis，MongoDB），简单介绍下Redis</li>
 <li>知道哪些排序算法（冒泡，堆，桶，快排，分治），选一个解释一下</li>
 <li>SpringBoot的拦截器用过吗？具体怎么实现？</li>
 </ol>
+<hr>
+<h1><span id="腾讯金融科技">腾讯金融科技</span></h1><h3><span id="java后端开发一面">Java后端开发（一面）</span></h3><ol>
+<li><p><strong>常见的I&#x2F;O模型了解吗？</strong></p>
+<ul>
+<li><p><strong>BIO：</strong></p>
+<p><strong>追问：</strong>说说常见的BIO模型的应用（Reader,Writer,InputStream,OutputStream等都是BIO的实现）</p>
+</li>
+<li><p><strong>NIO：</strong></p>
+<p>Java NIO使用了多路复用技术，提供了三个组件：Channel，Buffer和Selector</p>
+<p><strong>Channel</strong>就是通道，通道连接着客户端和服务端，用来传递数据，因此通常一个通道表示一个连接；<strong>Buffer</strong>表示缓冲区，用户从Channel中读数据，或往里面写数据都要通过Buffer实现。传统BIO基于字节流，读写都必须按顺序进行，但是Buffer提供了一系列方法，使用户可以自行移动读写下标；<strong>Selector</strong>是选择器，当检测到Channel事件时（Java NIO只定义了四个事件：SelectionKey.OP_CONNECT，SelectionKey.OP_ACCEPT，SelectionKey.OP_READ，SelectionKey.OP_WRITE），对这个Channel进行处理</p>
+</li>
+<li><p><strong>AIO：</strong></p>
+<p>基于事件回调机制，应用程序发起 I&#x2F;O 操作后，内核负责数据传输过程，完成后通知应用程序。应用程序无需等待数据传输，可执行其他任务</p>
 </li>
 </ul>
-<p><strong>总结：</strong>难度不大，时间较短，面试之前有点紧张，自我感觉不满意</p>
+</li>
+<li><p><strong>同步&#x2F;异步 和 阻塞&#x2F;非阻塞 的区别</strong></p>
+<p>同步&#x2F;异步强调发出请求后，是否需要等待执行结果才能执行后续操作</p>
+<p>阻塞&#x2F;非阻塞强调等待消息通知时的状态，阻塞表示调用结果返回之前当前线程被挂起，而非阻塞则得到结果之前不会阻塞</p>
+</li>
+<li><p><strong>多路复用的“多路”指的是什么？</strong></p>
+<p>指同时监听的多个I&#x2F;O事件</p>
+</li>
+<li><p><strong>Netty具体封装了哪些复杂的操作？</strong></p>
+<p>Netty主要对NIO基本的Channel，Selector和Buffer进行了更高层的封装，屏蔽了底层的复杂性</p>
+<p>Netty提供了对多种协议的很好支持，封装了对多协议支持的复杂性</p>
+<p>Netty封装了三种Reactor模型：单线程单Reactor，多线程单Reactor，多线程多Reactor</p>
+</li>
+<li><p><strong>谈谈你对ZooKeeper的理解</strong></p>
+<p>保证分布式数据一致性的解决方案，可用于统一配置管理、命名服务，分布式锁，集群服务等。</p>
+<p>zk保证了一致性和分区容错性，牺牲了部分可用性</p>
+</li>
+<li><p><strong>说明Redis的选举机制，解释为什么是过半投票</strong></p>
+<p>过半机制为了防止脑裂</p>
+</li>
+<li><p><strong>Redis集群怎么确定主节点挂了？如何选举新节点？如何保证最新数据？</strong></p>
+<p><strong>确定主节点宕机：</strong>定期PING，若不通，则询问其它哨兵，当过半数哨兵认为宕机，则通过Raft算法选出领头哨兵进行故障恢复</p>
+<p><strong>选举：</strong><a class="link" target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1751001">一文搞懂 Redis 的三种集群方案-腾讯云开发者社区-腾讯云 (tencent.com)<i class="fas fa-external-link-alt"></i></a></p>
+<p><strong>保证最新数据：</strong>根据复制偏移量确定</p>
+</li>
+</ol>
 <hr>
+<h1><span id="万得数据">万得数据</span></h1><h2><span id="java后端开发一面a">Java后端开发（一面A）</span></h2><ol>
+<li><p><strong>进程通信方式</strong></p>
+<ul>
+<li><p><strong>管道：</strong>半双工，有特定的读端和写端</p>
+<ul>
+<li><p>无名管道(pipe)：只允许有亲缘关系的进程之间使用</p>
+</li>
+<li><p>命名管道(fifo)：允许任何进程之间使用</p>
+</li>
+</ul>
+</li>
+<li><p><strong>消息队列：</strong>一个消息的链表，是一系列保存在内核中消息的列表。用户进程可以向消息队列添加消息，也可以读取消息。消息队列与管道通信相比，其优势是对每个消息指定特定的消息类型，接收的时候不需要按照队列次序，而是可以根据自定义条件接收特定类型的消息</p>
+</li>
+<li><p><strong>共享内存：</strong>效率高</p>
+</li>
+<li><p><strong>信号量</strong></p>
+</li>
+</ul>
+</li>
+</ol>
 
                     
                 </div>

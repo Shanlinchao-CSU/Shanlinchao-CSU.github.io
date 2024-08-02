@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Keep Team">
+    
+    <title>
+        
+            Redis复习笔记 |
+        
+        Keep Theme
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"shanlinchao-csu.github.io","root":"/","language":"en"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Keep Theme","author":"Keep Team","avatar":"/images/avatar.svg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":false,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.1.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Keep Theme
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                HOME
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >HOME</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Redis复习笔记
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.svg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">ShanLinChao</span>
+                                
+                                    <span class="author-badge">Lv1</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-07-29 15:04:00</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Wed Jul 31 2024 00:09:51 GMT+0800">2024-07-31 00:09:51</span>
+            </span>
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Redis/">Redis</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <!--toc-->
+
+<p><a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaolincoding/p/16370783.html">2 万字 + 20张图｜ 细说 Redis 九种数据类型和应用场景 - 小林coding - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link" target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2315477">3 万字 + 40 张图 ｜ Redis 常见面试题（2023 版本）-腾讯云开发者社区-腾讯云 (tencent.com)<i class="fas fa-external-link-alt"></i></a></p>
+<h1><span id="1-基础知识点">1. 基础知识点</span></h1><h2><span id="11-redis与memcached">1.1 Redis与Memcached</span></h2><p><strong>共同点：</strong></p>
+<ol>
+<li>基于内存</li>
+<li>有过期策略</li>
+<li>性能高</li>
+</ol>
+<p><strong>不同点：</strong></p>
+<ol>
+<li>Redis支持的数据类型丰富，但Memcached只支持最基础的key-value</li>
+<li>Redis支持数据持久化，可将内存数据保存到磁盘；但Memcached没有，重启或挂掉之后数据就丢失</li>
+<li>Redis原生支持集群，Memcached对集群没有原生支持</li>
+<li>Redis支持发布订阅，Lua脚本，事务等，Memcached不支持</li>
+</ol>
+<hr>
+<h1><span id="2数据类型">2.数据类型</span></h1><h2><span id="21-string">2.1 String</span></h2><h3><span id="211-实现">2.1.1 实现</span></h3><p>Redis中的String使用SDS进行实现</p>
+<p><strong>与C语言的String相比：</strong></p>
+<ol>
+<li>SDS不仅能保存文本数据，也可以保存图片，视频等二进制数据</li>
+<li>SDS获取长度复杂度为O(1)，因为保存了长度变量</li>
+<li>SDS的API是安全的，拼接字符串不会导致缓冲区溢出</li>
+</ol>
+<p><strong>具体实现按照具体保存的值分三种情况：</strong></p>
+<ol>
+<li><p><strong>整数值</strong></p>
+<p>将encodeing设置为INT，且将整数值保存在ptr中</p>
+<p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/int.png" alt="img"></p>
+</li>
+<li><p><strong>短字符串（在redis5.0及之后，短字符串是44子节及以下的数据）</strong></p>
+<p>将encoding设置为embstr，且只需要调用一次内存分配函数分配redisObject和SDS的内存空间</p>
+<p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/embstr.png" alt="img"></p>
+</li>
+<li><p><strong>长字符串</strong></p>
+<p>将encoding设置为raw，且需要分配两次内存</p>
+<p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/raw.png" alt="img"></p>
+</li>
+</ol>
+<h3><span id="212-常用命令">2.1.2 常用命令</span></h3><p>SET,GET,MEST,MGET,INCR,INCRBY,DECR,DECRBY</p>
+<p>设置过期时间：EXPIRE(EX,秒级)，PEXPIRE(PX,毫秒级)</p>
+<p>不存在则插入：SETNX</p>
+<h3><span id="213-应用场景">2.1.3 应用场景</span></h3><ol>
+<li>缓存对象</li>
+<li>常规计数</li>
+<li>分布式锁</li>
+<li>共享Session</li>
+</ol>
+<h2><span id="22-hash">2.2 Hash</span></h2><h3><span id="221-实现">2.2.1 实现</span></h3><p>7.0之前使用压缩列表(数据少)&#x2F;哈希表(数据多)实现，7.0及之后使用listpack</p>
+<h3><span id="222-常用命令">2.2.2 常用命令</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 存储一个哈希表key的键值</span><br><span class="line">HSET key field value   </span><br><span class="line"># 获取哈希表key对应的field键值</span><br><span class="line">HGET key field</span><br><span class="line"></span><br><span class="line"># 在一个哈希表key中存储多个键值对</span><br><span class="line">HMSET key field value [field value...] </span><br><span class="line"># 批量获取哈希表key中多个field键值</span><br><span class="line">HMGET key field [field ...]       </span><br><span class="line"># 删除哈希表key中的field键值</span><br><span class="line">HDEL key field [field ...]    </span><br><span class="line"></span><br><span class="line"># 返回哈希表key中field的数量</span><br><span class="line">HLEN key       </span><br><span class="line"># 返回哈希表key中所有的键值</span><br><span class="line">HGETALL key </span><br><span class="line"></span><br><span class="line"># 为哈希表key中field键的值加上增量n</span><br><span class="line">HINCRBY key field n               </span><br></pre></td></tr></table></figure>
+
+<h3><span id="223-应用场景">2.2.3 应用场景</span></h3><p>缓存对象</p>
+<h2><span id="23-list">2.3 List</span></h2><h3><span id="231-实现">2.3.1 实现</span></h3><p>3.2版本及之前，采用压缩链表(数据少且小)&#x2F;双向链表(数据多或大)实现，3.2之后采用QuickList</p>
+<h3><span id="232-常用命令">2.3.2 常用命令</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 将一个或多个值value插入到key列表的表头(最左边)，最后的值在最前面</span><br><span class="line">LPUSH key value [value ...] </span><br><span class="line"># 将一个或多个值value插入到key列表的表尾(最右边)</span><br><span class="line">RPUSH key value [value ...]</span><br><span class="line"># 移除并返回key列表的头元素</span><br><span class="line">LPOP key     </span><br><span class="line"># 移除并返回key列表的尾元素</span><br><span class="line">RPOP key </span><br><span class="line"></span><br><span class="line"># 返回列表key中指定区间内的元素，区间以偏移量start和stop指定，从<span class="number">0</span>开始</span><br><span class="line">LRANGE key start stop</span><br><span class="line"></span><br><span class="line"># 从key列表表头弹出一个元素，没有就阻塞timeout秒，如果timeout=<span class="number">0</span>则一直阻塞</span><br><span class="line">BLPOP key [key ...] timeout</span><br><span class="line"># 从key列表表尾弹出一个元素，没有就阻塞timeout秒，如果timeout=<span class="number">0</span>则一直阻塞</span><br><span class="line">BRPOP key [key ...] timeout</span><br></pre></td></tr></table></figure>
+
+<h3><span id="233-应用场景">2.3.3 应用场景</span></h3><p>消息队列（不推荐使用List实现，更好的应该用Stream）</p>
+<h2><span id="24-set">2.4 Set</span></h2><h3><span id="241-实现">2.4.1 实现</span></h3><p>整数集合(数据少)&#x2F;哈希表(数据多)</p>
+<h3><span id="242-常用命令">2.4.2 常用命令</span></h3><p><strong>基本命令</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># 往集合key中存入元素，元素存在则忽略，若key不存在则新建</span><br><span class="line">SADD key member [member ...]</span><br><span class="line"># 从集合key中删除元素</span><br><span class="line">SREM key member [member ...] </span><br><span class="line"># 获取集合key中所有元素</span><br><span class="line">SMEMBERS key</span><br><span class="line"># 获取集合key中的元素个数</span><br><span class="line">SCARD key</span><br><span class="line"></span><br><span class="line"># 判断member元素是否存在于集合key中</span><br><span class="line">SISMEMBER key member</span><br><span class="line"></span><br><span class="line"># 从集合key中随机选出count个元素，元素不从key中删除</span><br><span class="line">SRANDMEMBER key [count]</span><br><span class="line"># 从集合key中随机选出count个元素，元素从key中删除</span><br><span class="line">SPOP key [count]</span><br></pre></td></tr></table></figure>
+
+<p><strong>集合运算</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 交集运算</span><br><span class="line">SINTER key [key ...]</span><br><span class="line"># 将交集结果存入新集合destination中</span><br><span class="line">SINTERSTORE destination key [key ...]</span><br><span class="line"></span><br><span class="line"># 并集运算</span><br><span class="line">SUNION key [key ...]</span><br><span class="line"># 将并集结果存入新集合destination中</span><br><span class="line">SUNIONSTORE destination key [key ...]</span><br><span class="line"></span><br><span class="line"># 差集运算</span><br><span class="line">SDIFF key [key ...]</span><br><span class="line"># 将差集结果存入新集合destination中</span><br><span class="line">SDIFFSTORE destination key [key ...]</span><br></pre></td></tr></table></figure>
+
+<h3><span id="243-应用场景">2.4.3 应用场景</span></h3><ol>
+<li>文章点赞（key为文章id，value为用户id）</li>
+<li>共同关注（key为用户id，value为用户关注的公众号id，通过交集运算可以得到共同关注结果）</li>
+<li>抽奖活动</li>
+</ol>
+<h2><span id="25-zset">2.5 Zset</span></h2><h3><span id="251-实现">2.5.1 实现</span></h3><p>7.0以前采用压缩列表(数据少)&#x2F;跳表(数据多)实现，7.0及以后采用listpack实现</p>
+<h3><span id="252-常用命令">2.5.2 常用命令</span></h3><p>基本和set一样，除了要设置SCORE和没有差集</p>
+<p><strong>基本命令</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># 往有序集合key中加入带分值元素</span><br><span class="line">ZADD key score member [[score member]...]   </span><br><span class="line"># 往有序集合key中删除元素</span><br><span class="line">ZREM key member [member...]                 </span><br><span class="line"># 返回有序集合key中元素member的分值</span><br><span class="line">ZSCORE key member</span><br><span class="line"># 返回有序集合key中元素个数</span><br><span class="line">ZCARD key </span><br><span class="line"></span><br><span class="line"># 为有序集合key中元素member的分值加上increment</span><br><span class="line">ZINCRBY key increment member </span><br><span class="line"></span><br><span class="line"># 正序获取有序集合key从start下标到stop下标的元素</span><br><span class="line">ZRANGE key start stop [WITHSCORES]</span><br><span class="line"># 倒序获取有序集合key从start下标到stop下标的元素</span><br><span class="line">ZREVRANGE key start stop [WITHSCORES]</span><br><span class="line"></span><br><span class="line"># 返回有序集合中指定分数区间内的成员，分数由低到高排序。</span><br><span class="line">ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]</span><br><span class="line"></span><br><span class="line"># 返回指定成员区间内的成员，按字典正序排列, 分数必须相同。</span><br><span class="line">ZRANGEBYLEX key min max [LIMIT offset count]</span><br><span class="line"># 返回指定成员区间内的成员，按字典倒序排列, 分数必须相同</span><br><span class="line">ZREVRANGEBYLEX key max min [LIMIT offset count]</span><br></pre></td></tr></table></figure>
+
+<p><strong>集合运算</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 并集计算(相同元素分值相加)，numberkeys一共多少个key，WEIGHTS每个key对应的分值乘积</span><br><span class="line">ZUNIONSTORE destkey numberkeys key [key...] </span><br><span class="line"># 交集计算(相同元素分值相加)，numberkeys一共多少个key，WEIGHTS每个key对应的分值乘积</span><br><span class="line">ZINTERSTORE destkey numberkeys key [key...]</span><br></pre></td></tr></table></figure>
+
+<h3><span id="253-应用场景">2.5.3 应用场景</span></h3><ol>
+<li>排行榜</li>
+<li>电话姓名排序</li>
+</ol>
+<h2><span id="26-bitmap">2.6 BitMap</span></h2><h3><span id="261-实现">2.6.1 实现</span></h3><p>Bitmap 本身是用 String 类型作为底层数据结构实现的一种统计二值状态的数据类型</p>
+<p>String 类型是会保存为二进制的字节数组，所以，Redis 就把字节数组的每个 bit 位利用起来，用来表示一个元素的二值状态</p>
+<p>可以把 Bitmap 看作是一个 bit 数组</p>
+<p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/bitmap.png" alt="img"></p>
+<h3><span id="262-常用命令">2.6.2 常用命令</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 设置值，其中value只能是 <span class="number">0</span> 和 <span class="number">1</span></span><br><span class="line">SETBIT key offset value</span><br><span class="line"></span><br><span class="line"># 获取值</span><br><span class="line">GETBIT key offset</span><br><span class="line"></span><br><span class="line"># 获取指定范围内值为 <span class="number">1</span> 的个数</span><br><span class="line"># start 和 end 以字节为单位</span><br><span class="line">BITCOUNT key start end</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># BitMap间的运算</span><br><span class="line"># operations 位移操作符，枚举值</span><br><span class="line">  AND 与运算 &amp;</span><br><span class="line">  OR 或运算 |</span><br><span class="line">  XOR 异或 ^</span><br><span class="line">  NOT 取反 ~</span><br><span class="line"># result 计算的结果，会存储在该key中</span><br><span class="line"># key1 … keyn 参与运算的key，可以有多个，空格分割，not运算只能一个key</span><br><span class="line"># 当 BITOP 处理不同长度的字符串时，较短的那个字符串所缺少的部分会被看作 <span class="number">0</span>。返回值是保存到 destkey 的字符串的长度（以字节<span class="type">byte</span>为单位），和输入 key 中最长的字符串长度相等。</span><br><span class="line">BITOP [operations] [result] [key1] [keyn…]</span><br><span class="line"></span><br><span class="line"># 返回指定key中第一次出现指定value(<span class="number">0</span>/<span class="number">1</span>)的位置</span><br><span class="line">BITPOS [key] [value]</span><br></pre></td></tr></table></figure>
+
+<h3><span id="263-应用场景">2.6.3 应用场景</span></h3><ol>
+<li>签到统计</li>
+<li>判断用户登录状态</li>
+<li>连续签到用户总数</li>
+</ol>
+<h2><span id="27-hyperloglog">2.7 HyperLogLog</span></h2><h3><span id="271-概要介绍">2.7.1 概要介绍</span></h3><p>基于统计基数，计算不重复元素的个数</p>
+<p>计算方法基于统计，因此存在误差</p>
+<h3><span id="272-常用命令">2.7.2 常用命令</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 添加指定元素到 HyperLogLog 中</span><br><span class="line">PFADD key element [element ...]</span><br><span class="line"></span><br><span class="line"># 返回给定 HyperLogLog 的基数估算值。</span><br><span class="line">PFCOUNT key [key ...]</span><br><span class="line"></span><br><span class="line"># 将多个 HyperLogLog 合并为一个 HyperLogLog</span><br><span class="line">PFMERGE destkey sourcekey [sourcekey ...]</span><br></pre></td></tr></table></figure>
+
+<h3><span id="273-应用场景">2.7.3 应用场景</span></h3><p>百万级网页UV计数</p>
+<h2><span id="28-geo">2.8 GEO</span></h2><h3><span id="281-概要介绍">2.8.1 概要介绍</span></h3><p>存储地理位置信息，并对存储的数据进行操作</p>
+<h3><span id="282-实现">2.8.2 实现</span></h3><p>GEO 本身并没有设计新的底层数据结构，而是直接使用了 Sorted Set 集合类型。</p>
+<p>GEO 类型使用 GeoHash 编码方法实现了经纬度到 Sorted Set 中元素权重分数的转换，这其中的两个关键机制就是「对二维地图做区间划分」和「对区间进行编码」。一组经纬度落在某个区间后，就用区间的编码值来表示，并把编码值作为 Sorted Set 元素的权重分数。</p>
+<p>这样一来，我们就可以把经纬度保存到 Sorted Set 中，利用 Sorted Set 提供的“按权重进行有序范围查找”的特性，实现 LBS 服务中频繁使用的“搜索附近”的需求。</p>
+<h3><span id="283-常用命令">2.8.3 常用命令</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 存储指定的地理空间位置，可以将一个或多个经度(longitude)、纬度(latitude)、位置名称(member)添加到指定的 key 中。</span><br><span class="line">GEOADD key longitude latitude member [longitude latitude member ...]</span><br><span class="line"></span><br><span class="line"># 从给定的 key 里返回所有指定名称(member)的位置（经度和纬度），不存在的返回 nil。</span><br><span class="line">GEOPOS key member [member ...]</span><br><span class="line"></span><br><span class="line"># 返回两个给定位置之间的距离。</span><br><span class="line">GEODIST key member1 member2 [m|km|ft|mi]</span><br><span class="line"></span><br><span class="line"># 根据用户给定的经纬度坐标来获取指定范围内的地理位置集合。</span><br><span class="line">GEORADIUS key longitude latitude radius m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [COUNT count] [ASC|DESC] [STORE key] [STOREDIST key]</span><br></pre></td></tr></table></figure>
+
+<h3><span id="284-应用场景">2.8.4 应用场景</span></h3><p>滴滴叫车</p>
+<h2><span id="29-stream">2.9 Stream</span></h2><p>内容较多，具体见<a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaolincoding/p/16370783.html">2 万字 + 20张图｜ 细说 Redis 九种数据类型和应用场景 - 小林coding - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
+<hr>
+<h1><span id="3redis线程模型">3.Redis线程模型</span></h1><p>Redis采用单线程处理请求，但在启动时会额外启动三个后台线程用来处理耗时操作：关闭文件，AOF刷盘，释放内存</p>
+<p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/b838907900f79017fe6d2e1980cc15e4.png" alt="img"></p>
+<p>在Redis7.0及之后的版本中，开始支持多线程来处理网络I&#x2F;O请求，但对于命令的处理仍然使用单线程</p>
+<h2><span id="31-redis使用单线程速度快的原因">3.1 Redis使用单线程速度快的原因</span></h2><ol>
+<li>Redis大部分操作在内存中完成，因此CPU不是性能瓶颈</li>
+<li>避免多线程竞争，避免线程切换的开销，且不会导致死锁</li>
+<li>采用了多路复用机制</li>
+</ol>
+<h1><span id="4redis持久化">4.Redis持久化</span></h1><ol>
+<li><strong>AOF 日志</strong>：每执行一条写操作命令，就把该命令以追加的方式写入到一个文件里；</li>
+<li><strong>RDB 快照</strong>：将某一时刻的内存数据，以二进制的方式写入磁盘；</li>
+<li><strong>混合持久化方式</strong>：Redis  4.0 新增的方式，集成了 AOF 和 RBD 的优点；</li>
+</ol>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Redis/">Redis</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/07/22/Java%E5%9F%BA%E7%A1%80%E6%A2%B3%E7%90%86/"
+                                   title="Java基础梳理"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Java基础梳理</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Keep Team</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
