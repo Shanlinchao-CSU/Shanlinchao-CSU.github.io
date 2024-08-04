@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Wed Jul 31 2024 00:09:51 GMT+0800">2024-07-31 00:09:51</span>
+                <span class="datetime" data-updated="Sun Aug 04 2024 16:56:32 GMT+0800">2024-08-04 16:56:32</span>
             </span>
         
 
@@ -236,8 +236,10 @@
 <li>Redis原生支持集群，Memcached对集群没有原生支持</li>
 <li>Redis支持发布订阅，Lua脚本，事务等，Memcached不支持</li>
 </ol>
+<h2><span id="12-lru和lfu">1.2 LRU和LFU</span></h2><p><strong>LRU：</strong>最近最少使用，将最新操作的键移到链表头部，从链表尾部删除</p>
+<p><strong>LFU：</strong>最近最不常用，根据访问次数淘汰数据</p>
 <hr>
-<h1><span id="2数据类型">2.数据类型</span></h1><h2><span id="21-string">2.1 String</span></h2><h3><span id="211-实现">2.1.1 实现</span></h3><p>Redis中的String使用SDS进行实现</p>
+<h1><span id="2-数据类型">2. 数据类型</span></h1><h2><span id="21-string">2.1 String</span></h2><h3><span id="211-实现">2.1.1 实现</span></h3><p>Redis中的String使用SDS进行实现</p>
 <p><strong>与C语言的String相比：</strong></p>
 <ol>
 <li>SDS不仅能保存文本数据，也可以保存图片，视频等二进制数据</li>
@@ -327,7 +329,7 @@
 <h3><span id="284-应用场景">2.8.4 应用场景</span></h3><p>滴滴叫车</p>
 <h2><span id="29-stream">2.9 Stream</span></h2><p>内容较多，具体见<a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaolincoding/p/16370783.html">2 万字 + 20张图｜ 细说 Redis 九种数据类型和应用场景 - 小林coding - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
 <hr>
-<h1><span id="3redis线程模型">3.Redis线程模型</span></h1><p>Redis采用单线程处理请求，但在启动时会额外启动三个后台线程用来处理耗时操作：关闭文件，AOF刷盘，释放内存</p>
+<h1><span id="3-redis线程模型">3. Redis线程模型</span></h1><p>Redis采用单线程处理请求，但在启动时会额外启动三个后台线程用来处理耗时操作：关闭文件，AOF刷盘，释放内存</p>
 <p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/b838907900f79017fe6d2e1980cc15e4.png" alt="img"></p>
 <p>在Redis7.0及之后的版本中，开始支持多线程来处理网络I&#x2F;O请求，但对于命令的处理仍然使用单线程</p>
 <h2><span id="31-redis使用单线程速度快的原因">3.1 Redis使用单线程速度快的原因</span></h2><ol>
@@ -335,11 +337,123 @@
 <li>避免多线程竞争，避免线程切换的开销，且不会导致死锁</li>
 <li>采用了多路复用机制</li>
 </ol>
-<h1><span id="4redis持久化">4.Redis持久化</span></h1><ol>
-<li><strong>AOF 日志</strong>：每执行一条写操作命令，就把该命令以追加的方式写入到一个文件里；</li>
-<li><strong>RDB 快照</strong>：将某一时刻的内存数据，以二进制的方式写入磁盘；</li>
-<li><strong>混合持久化方式</strong>：Redis  4.0 新增的方式，集成了 AOF 和 RBD 的优点；</li>
+<h1><span id="4-redis持久化">4. Redis持久化</span></h1><h2><span id="41-aof日志">4.1 AOF日志</span></h2><p>每执行一条写操作命令，就把该命令以追加的方式写入到一个文件里</p>
+<h3><span id="411-执行和写的顺序">4.1.1 执行和写的顺序？</span></h3><p>先执行后写</p>
+<p><strong>优势：</strong></p>
+<ol>
+<li>不用对命令进行检查，避免额外检查开销</li>
+<li>当写操作执行成功之后才会写入AOF日志，因此不会阻塞当前写操作的执行</li>
 </ol>
+<p><strong>劣势：</strong></p>
+<ol>
+<li>导致数据丢失（没来得及保存到日志时宕机）</li>
+<li>不阻塞当前操作，但是</li>
+</ol>
+<h3><span id="412-redis写入aof日志">4.1.2 Redis写入AOF日志</span></h3><p><strong>过程：</strong></p>
+<ul>
+<li>Redis执行完命令后，将命令追加到缓冲区</li>
+<li>通过write()系统调用，将数据加载到内核缓冲区</li>
+<li>由内核决定何时数据写入硬盘</li>
+</ul>
+<p><strong>写入硬盘策略：</strong></p>
+<p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/bd0b3a1f73891b132af21fbd5758eb44.png" alt="img"></p>
+<h3><span id="413-aof重写">4.1.3 AOF重写</span></h3><p><strong>目的：</strong>解决AOF日志文件过大的问题</p>
+<p><strong>方式：</strong>读取当前数据库中的所有键值对，然后将每一个键值对用一条命令记录到「新的 AOF 文件」，等到全部记录完后，就将新的 AOF 文件替换掉现有的 AOF 文件</p>
+<p>AOF重写是由<strong>子进程</strong>完成的，好处有两点：</p>
+<ol>
+<li>不阻塞主进程</li>
+<li>使用子进程而非子线程，因为线程是共享内存的，修改数据时需要加锁以保证数据安全。但使用子进程，父子进程以只读的方式共享内存，当修改的时候触发写时复制，进程获得独立的数据副本，在没有锁的情况下保障了数据安全</li>
+</ol>
+<p>AOF重写过程中，主进程是可以修改数据的，导致了<strong>数据不一致</strong>，Redis解决方式如下：</p>
+<ol>
+<li>在常见子进程同时创建一个<strong>AOF重写缓冲区</strong></li>
+<li>主进程在AOF重写期间执行的命令追加到重写缓冲区</li>
+<li>子进程重写完毕后向主进程发送信号</li>
+<li>将重写缓冲区的内容追加到新AOF日志文件中</li>
+<li>覆盖现有AOF文件</li>
+</ol>
+<h2><span id="42-rdb快照">4.2 RDB快照</span></h2><p><strong>优势：</strong>相对于AOF日志重新加载时需要把所有的指令全部执行一遍，RDB快照只需要把全部数据读入内存即可</p>
+<h2><span id="43-混合持久化">4.3 混合持久化</span></h2><p>在重写过程中，先是以RBD快照形式存到AOF日志文件中，然后对于主进程的增量命令采用AOF重写缓冲区解决，使用AOF日志形式进行持久化</p>
+<h1><span id="5-集群">5. 集群</span></h1><h2><span id="51-主从复制">5.1 主从复制</span></h2><p>主服务器可以进行<strong>读写</strong>操作，当发生写操作时自动将写操作同步给从服务器，而从服务器一般是<strong>只读</strong>，并接受主服务器同步过来写操作命令，然后执行这条命令</p>
+<h3><span id="511-主从复制第一次同步">5.1.1 主从复制第一次同步</span></h3><p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/ea4f7e86baf2435af3999e5cd38b6a26.png" alt="图片"></p>
+<p><strong>第一阶段：</strong></p>
+<ul>
+<li>从服务器向主服务器发送psync命令，带有两个参数：<ul>
+<li>runID：每个redis服务器启动时自动生成的ID，这里本应该表示主服务器ID，但是从服务器并不知道主服务器ID，所以为”?”</li>
+<li>offset：复制的进度，第一次同步时进度为-1</li>
+</ul>
+</li>
+<li>主服务器返回FULLRESYNC命令，带着自己的runID和offset</li>
+</ul>
+<p><strong>第二阶段：</strong></p>
+<ul>
+<li>主服务器使用bgsave生成RDB文件，并用子进程发送给从服务器</li>
+</ul>
+<p><strong>第三阶段：</strong></p>
+<ul>
+<li>在主服务器生成、发送RDB文件，以及从服务器加载RDB文件时，主服务器可能执行新命令，这些新命令将被保存到replication buffer缓冲区中</li>
+<li>从服务器加载完毕后会向主服务器发送确认消息</li>
+<li>主服务器收到确认消息后，将replication buffer中的命令发送给从服务器，完成第一次数据同步</li>
+</ul>
+<h3><span id="512-命令传播">5.1.2 命令传播</span></h3><p>第一次同步之后，主从服务器之间维持一个TCP长连接，后续数据通过该连接进行发送</p>
+<h3><span id="513-分摊主服务器压力">5.1.3 分摊主服务器压力</span></h3><p>从服务器也可承担主服务器的责任</p>
+<p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/4d850bfe8d712d3d67ff13e59b919452.png" alt="图片"></p>
+<h3><span id="514-增量复制">5.1.4 增量复制</span></h3><p>整个集群维护一个<strong>环形</strong>缓冲区repl_backlog_buffer</p>
+<p>replication offset用于在repl_backlog_buffer上标注缓冲区的同步进度，每个节点都有一个进度，主服务器的叫master_repl_offset，记录自己写的位置；从服务器的叫slave_repl_offset，记录自己读的位置</p>
+<p>增量复制通常用于连接断开后重连的情况，根据主从读写偏移量计算出主服务器需要发送哪些数据给从服务器</p>
+<p><strong>缓冲区数据覆盖：</strong></p>
+<p>对同一个节点来说，这个进度是一直递增的，但是缓冲区是环形且大小有限的，因此比如说在缓冲区有地址A和B，B在A之后。现在主服务器写到B了，A的偏移是10，B的偏移是15。此时从服务器的读取偏移量是9，马上就要读A了，但是这时候从服务器的连接断了，等它再连回来的时候，主服务器已经转过一圈并且把A地址的偏移量改成30了，这时候A想读的数据已经被覆盖了</p>
+<p>对于数据覆盖的情况，需要直接使用<strong>全量复制</strong></p>
+<p>因此，需要合理适当增大环形缓冲区容量</p>
+<h2><span id="52-哨兵模式">5.2 哨兵模式</span></h2><h3><span id="521-判断节点故障">5.2.1 判断节点故障</span></h3><p><strong>主观下线：</strong>一个哨兵在给某个节点PING之后没在规定时间内收到回复，那么该哨兵就认为该节点主观下线</p>
+<p><strong>客观下线：</strong>一个哨兵判断某节点主观下线之后，会发起赞同&#x2F;反对投票。当获得的赞同票数达到配置的quorum数量时，则该哨兵认为该节点客观下线。一般quorum配置为：哨兵数&#x2F;2+1</p>
+<h3><span id="522-选举哨兵leader">5.2.2 选举哨兵Leader</span></h3><p><strong>候选者：</strong>判断节点客观下线的哨兵都是候选者</p>
+<p><strong>选举：</strong></p>
+<ol>
+<li>每个哨兵只有一次投票机会，且候选者将票投给自己</li>
+<li>候选者要求其它哨兵给自己投票</li>
+<li>候选者完成以下两个条件即可成为leader：1.得到半数以上赞成票  2.票数大于等于quorum</li>
+</ol>
+<h3><span id="523-哨兵数量">5.2.3 哨兵数量</span></h3><p>最少为3个，否则只要一个哨兵宕机，就无法得到半数以上票</p>
+<h3><span id="524-主从故障转移">5.2.4 主从故障转移</span></h3><ol>
+<li>在旧主节点下属所有从节点中选择一个节点设为新主节点，选择依据为：优先级&gt;复制进度靠前&gt;ID号小</li>
+<li>将从节点指向新主节点</li>
+<li>通知客户端主节点更换（发布&#x2F;订阅机制）</li>
+<li>监控旧主节点，待恢复后将其变为从节点</li>
+</ol>
+<h1><span id="53-切片集群模式">5.3 切片集群模式</span></h1><p>主要是当数据量过大，一个节点存储不下的时候，使用集群来分担数据存储</p>
+<p>原理是根据存储数据的key，哈希到对应哈希槽中；每个哈希槽都被分配(平均分配&#x2F;手动分配)在某一个节点上</p>
+<p><img src="/assets/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/b1816764542d2c61fac4464029805c1e.png" alt="img"></p>
+<h1><span id="6-redis缓存设计">6. Redis缓存设计</span></h1><h2><span id="61-缓存雪崩">6.1 缓存雪崩</span></h2><p><strong>描述：</strong>由于缓存中大批量数据同一时间过期，查询数据量巨大，均需要访问数据库，导致数据库负载过大最终崩溃；强调大量不同数据</p>
+<p><strong>解决方案：</strong></p>
+<ol>
+<li>将缓存失效时间打散</li>
+<li>设置缓存不过期</li>
+</ol>
+<h2><span id="62-缓存击穿">6.2 缓存击穿</span></h2><p><strong>描述：</strong>由于某热点数据过期，庞大用户量访问该热点数据导致数据库负载过大最终崩溃；强调对同一个数据的大量并发</p>
+<p><strong>解决方案：</strong></p>
+<ol>
+<li>互斥锁，保证同一时间只有一个业务线程请求缓存</li>
+<li>不给热点数据设置过期时间，后台异步更新缓存；或者热点数据过期前提前通知后台线程更新缓存且重设过期时间</li>
+</ol>
+<h2><span id="63-缓存穿透">6.3 缓存穿透</span></h2><p><strong>描述：</strong>大量并发查询缓存和数据库中均不存在的数据</p>
+<p><strong>解决方案：</strong></p>
+<ol>
+<li>限制非法请求</li>
+<li>发生缓存穿透现象时，在缓存中针对该key设置默认值或空值</li>
+<li>布隆过滤器</li>
+</ol>
+<h2><span id="64-缓存更新策略">6.4 缓存更新策略</span></h2><h3><span id="641-旁路缓存策略">6.4.1 旁路缓存策略</span></h3><p>应用程序直接与数据库、缓存交互，并负责缓存的维护</p>
+<p><strong>写策略：</strong>先写数据库，后删除缓存</p>
+<p><strong>读策略：</strong>若命中缓存则直接返回；若未命中缓存则从数据库中读后更新缓存</p>
+<p>*需要注意写策略必须先写后删：理论上说，无论先写后删还是先删后写，都会在并发的情况下有数据库缓存的不一致性风险；但是由于对缓存的操作要远快于对数据库的操作，先写后删更能降低不一致性风险（有两个进程A和B，A先修改数据库设置name&#x3D;”ming”，这时候同时发生**A修改缓存name&#x3D;”ming”<strong>和</strong>B修改数据库name&#x3D;”zhang”*<em>这两件事，因为修改缓存远快于修改数据库，所以最后一定是B修改缓存name&#x3D;”zhang”，确保了一致性。如果过程反过来就无法保证）</em></p>
+<p><strong>适用：</strong>读多写少的场景，不适用于写多的场景</p>
+<h3><span id="642-读穿x2f写穿策略">6.4.2 读穿&#x2F;写穿策略</span></h3><p>客户端只与缓存交互，数据库相关的操作全部交给缓存</p>
+<p>该策略比较少见</p>
+<h3><span id="643-写回策略">6.4.3 写回策略</span></h3><p>写操作只操作缓存，将缓存数据设置为脏并立马返回，不会立马更新数据库</p>
+<p>对于数据库，采用批量异步更新</p>
+<p><strong>适用：</strong>写多</p>
+<p><strong>缺点：</strong>容易造成数据丢失，数据不是强一致性的</p>
 
                     
                 </div>
