@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Aug 04 2024 17:03:23 GMT+0800">2024-08-04 17:03:23</span>
+                <span class="datetime" data-updated="Sun Aug 04 2024 17:05:27 GMT+0800">2024-08-04 17:05:27</span>
             </span>
         
 
@@ -219,7 +219,115 @@
                     
 
                     
-                         <!--toc-->
+                         <!-- toc -->
+
+<ul>
+<li><a href="#1-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9">1. 基础知识点</a><ul>
+<li><a href="#11-redis%E4%B8%8Ememcached">1.1 Redis与Memcached</a></li>
+<li><a href="#12-lru%E5%92%8Clfu">1.2 LRU和LFU</a></li>
+</ul>
+</li>
+<li><a href="#2-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">2. 数据类型</a><ul>
+<li><a href="#21-string">2.1 String</a><ul>
+<li><a href="#211-%E5%AE%9E%E7%8E%B0">2.1.1 实现</a></li>
+<li><a href="#212-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">2.1.2 常用命令</a></li>
+<li><a href="#213-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">2.1.3 应用场景</a></li>
+</ul>
+</li>
+<li><a href="#22-hash">2.2 Hash</a><ul>
+<li><a href="#221-%E5%AE%9E%E7%8E%B0">2.2.1 实现</a></li>
+<li><a href="#222-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">2.2.2 常用命令</a></li>
+<li><a href="#223-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">2.2.3 应用场景</a></li>
+</ul>
+</li>
+<li><a href="#23-list">2.3 List</a><ul>
+<li><a href="#231-%E5%AE%9E%E7%8E%B0">2.3.1 实现</a></li>
+<li><a href="#232-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">2.3.2 常用命令</a></li>
+<li><a href="#233-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">2.3.3 应用场景</a></li>
+</ul>
+</li>
+<li><a href="#24-set">2.4 Set</a><ul>
+<li><a href="#241-%E5%AE%9E%E7%8E%B0">2.4.1 实现</a></li>
+<li><a href="#242-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">2.4.2 常用命令</a></li>
+<li><a href="#243-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">2.4.3 应用场景</a></li>
+</ul>
+</li>
+<li><a href="#25-zset">2.5 Zset</a><ul>
+<li><a href="#251-%E5%AE%9E%E7%8E%B0">2.5.1 实现</a></li>
+<li><a href="#252-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">2.5.2 常用命令</a></li>
+<li><a href="#253-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">2.5.3 应用场景</a></li>
+</ul>
+</li>
+<li><a href="#26-bitmap">2.6 BitMap</a><ul>
+<li><a href="#261-%E5%AE%9E%E7%8E%B0">2.6.1 实现</a></li>
+<li><a href="#262-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">2.6.2 常用命令</a></li>
+<li><a href="#263-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">2.6.3 应用场景</a></li>
+</ul>
+</li>
+<li><a href="#27-hyperloglog">2.7 HyperLogLog</a><ul>
+<li><a href="#271-%E6%A6%82%E8%A6%81%E4%BB%8B%E7%BB%8D">2.7.1 概要介绍</a></li>
+<li><a href="#272-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">2.7.2 常用命令</a></li>
+<li><a href="#273-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">2.7.3 应用场景</a></li>
+</ul>
+</li>
+<li><a href="#28-geo">2.8 GEO</a><ul>
+<li><a href="#281-%E6%A6%82%E8%A6%81%E4%BB%8B%E7%BB%8D">2.8.1 概要介绍</a></li>
+<li><a href="#282-%E5%AE%9E%E7%8E%B0">2.8.2 实现</a></li>
+<li><a href="#283-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4">2.8.3 常用命令</a></li>
+<li><a href="#284-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF">2.8.4 应用场景</a></li>
+</ul>
+</li>
+<li><a href="#29-stream">2.9 Stream</a></li>
+</ul>
+</li>
+<li><a href="#3-redis%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B">3. Redis线程模型</a><ul>
+<li><a href="#31-redis%E4%BD%BF%E7%94%A8%E5%8D%95%E7%BA%BF%E7%A8%8B%E9%80%9F%E5%BA%A6%E5%BF%AB%E7%9A%84%E5%8E%9F%E5%9B%A0">3.1 Redis使用单线程速度快的原因</a></li>
+</ul>
+</li>
+<li><a href="#4-redis%E6%8C%81%E4%B9%85%E5%8C%96">4. Redis持久化</a><ul>
+<li><a href="#41-aof%E6%97%A5%E5%BF%97">4.1 AOF日志</a><ul>
+<li><a href="#411-%E6%89%A7%E8%A1%8C%E5%92%8C%E5%86%99%E7%9A%84%E9%A1%BA%E5%BA%8F">4.1.1 执行和写的顺序？</a></li>
+<li><a href="#412-redis%E5%86%99%E5%85%A5aof%E6%97%A5%E5%BF%97">4.1.2 Redis写入AOF日志</a></li>
+<li><a href="#413-aof%E9%87%8D%E5%86%99">4.1.3 AOF重写</a></li>
+</ul>
+</li>
+<li><a href="#42-rdb%E5%BF%AB%E7%85%A7">4.2 RDB快照</a></li>
+<li><a href="#43-%E6%B7%B7%E5%90%88%E6%8C%81%E4%B9%85%E5%8C%96">4.3 混合持久化</a></li>
+</ul>
+</li>
+<li><a href="#5-%E9%9B%86%E7%BE%A4">5. 集群</a><ul>
+<li><a href="#51-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6">5.1 主从复制</a><ul>
+<li><a href="#511-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%90%8C%E6%AD%A5">5.1.1 主从复制第一次同步</a></li>
+<li><a href="#512-%E5%91%BD%E4%BB%A4%E4%BC%A0%E6%92%AD">5.1.2 命令传播</a></li>
+<li><a href="#513-%E5%88%86%E6%91%8A%E4%B8%BB%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8E%8B%E5%8A%9B">5.1.3 分摊主服务器压力</a></li>
+<li><a href="#514-%E5%A2%9E%E9%87%8F%E5%A4%8D%E5%88%B6">5.1.4 增量复制</a></li>
+</ul>
+</li>
+<li><a href="#52-%E5%93%A8%E5%85%B5%E6%A8%A1%E5%BC%8F">5.2 哨兵模式</a><ul>
+<li><a href="#521-%E5%88%A4%E6%96%AD%E8%8A%82%E7%82%B9%E6%95%85%E9%9A%9C">5.2.1 判断节点故障</a></li>
+<li><a href="#522-%E9%80%89%E4%B8%BE%E5%93%A8%E5%85%B5leader">5.2.2 选举哨兵Leader</a></li>
+<li><a href="#523-%E5%93%A8%E5%85%B5%E6%95%B0%E9%87%8F">5.2.3 哨兵数量</a></li>
+<li><a href="#524-%E4%B8%BB%E4%BB%8E%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB">5.2.4 主从故障转移</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#53-%E5%88%87%E7%89%87%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F">5.3 切片集群模式</a></li>
+<li><a href="#6-redis%E7%BC%93%E5%AD%98%E8%AE%BE%E8%AE%A1">6. Redis缓存设计</a><ul>
+<li><a href="#61-%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9">6.1 缓存雪崩</a></li>
+<li><a href="#62-%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF">6.2 缓存击穿</a></li>
+<li><a href="#63-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F">6.3 缓存穿透</a></li>
+<li><a href="#64-%E7%BC%93%E5%AD%98%E6%9B%B4%E6%96%B0%E7%AD%96%E7%95%A5">6.4 缓存更新策略</a><ul>
+<li><a href="#641-%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5">6.4.1 旁路缓存策略</a></li>
+<li><a href="#642-%E8%AF%BB%E7%A9%BF%E5%86%99%E7%A9%BF%E7%AD%96%E7%95%A5">6.4.2 读穿&#x2F;写穿策略</a></li>
+<li><a href="#643-%E5%86%99%E5%9B%9E%E7%AD%96%E7%95%A5">6.4.3 写回策略</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#7-%E9%99%84%E5%BD%95">7. 附录</a></li>
+</ul>
+<!-- tocstop -->
 
 <h1><span id="1-基础知识点">1. 基础知识点</span></h1><h2><span id="11-redis与memcached">1.1 Redis与Memcached</span></h2><p><strong>共同点：</strong></p>
 <ol>
