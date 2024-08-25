@@ -166,7 +166,7 @@
                             <div class="author border-box">
                                 <span class="name">ShanLinChao</span>
                                 
-                                    <span class="author-badge">Lv1</span>
+                                    <span class="author-badge">Lv2</span>
                                 
                             </div>
                             <div class="meta-info border-box">
@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Jul 23 2024 16:00:52 GMT+0800">2024-07-23 16:00:52</span>
+                <span class="datetime" data-updated="Sun Aug 25 2024 00:09:04 GMT+0800">2024-08-25 00:09:04</span>
             </span>
         
 
@@ -234,25 +234,17 @@
 <li><a href="#136-%E4%B8%BA%E4%BD%95hashmap%E6%95%B0%E7%BB%84%E9%95%BF%E5%BA%A6%E4%B8%80%E5%AE%9A%E8%A6%812%E7%9A%84n%E6%AC%A1%E6%96%B9">1.3.6 为何HashMap数组长度一定要2的n次方？</a></li>
 <li><a href="#137-hashmap%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%B8%8D%E5%AE%89%E5%85%A8">1.3.7 HashMap的线程不安全</a></li>
 <li><a href="#138-hashmap%E7%9A%84%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F">1.3.8 HashMap的遍历方式</a></li>
-<li><a href="#139-concurrenthashmap">1.3.9 ConcurrentHashMap</a></li>
+</ul>
+</li>
+<li><a href="#32-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6">3.2 垃圾回收</a><ul>
+<li><a href="#321-%E6%AD%BB%E4%BA%A1%E5%AF%B9%E8%B1%A1%E5%88%A4%E6%96%AD%E6%96%B9%E6%B3%95">3.2.1 死亡对象判断方法</a></li>
+<li><a href="#322-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95">3.2.2 垃圾收集算法</a></li>
+<li><a href="#323-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8">3.2.3 垃圾收集器</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#%E4%BA%8C-%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B">二、线程和进程</a><ul>
-<li><a href="#11-%E5%AE%9A%E4%B9%89%E5%92%8C%E5%8C%BA%E5%88%AB">1.1 定义和区别</a></li>
-<li><a href="#12-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B">1.2 线程模型</a></li>
-<li><a href="#13-%E7%BA%BF%E7%A8%8B%E7%8B%AC%E6%9C%89%E4%B8%89%E8%A6%81%E7%B4%A0%E5%8F%8A%E5%BF%85%E8%A6%81%E6%80%A7">1.3 线程独有三要素及必要性</a></li>
-<li><a href="#14-%E5%A0%86%E5%8C%BA%E5%92%8C%E6%96%B9%E6%B3%95%E5%8C%BA">1.4 堆区和方法区</a></li>
-<li><a href="#15-%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B">1.5 创建线程</a></li>
-<li><a href="#16-%E7%BA%BF%E7%A8%8B%E5%85%AD%E7%8A%B6%E6%80%81">1.6 线程六状态</a></li>
-<li><a href="#17-%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8thread%E7%9A%84run%E6%96%B9%E6%B3%95">1.7 直接调用Thread的run方法</a></li>
-<li><a href="#18-%E5%B9%B6%E5%8F%91%E5%92%8C%E5%B9%B6%E8%A1%8C">1.8 并发和并行</a></li>
-<li><a href="#19-%E6%AD%BB%E9%94%81">1.9 死锁</a><ul>
-<li><a href="#191-%E6%AD%BB%E9%94%81%E5%BD%A2%E6%88%904%E6%9D%A1%E4%BB%B6">1.9.1 死锁形成4条件</a></li>
-<li><a href="#192-%E6%AD%BB%E9%94%81%E9%A2%84%E9%98%B2">1.9.2 死锁预防</a></li>
-</ul>
-</li>
+<li><a href="#%E5%9B%9B-java%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B">四、Java程序执行过程</a><ul>
 <li><a href="#%E5%85%B6%E5%AE%83%E9%97%AE%E9%A2%98">其它问题</a></li>
 </ul>
 </li>
@@ -346,73 +338,95 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (Map.Entry&lt;Integer, String&gt; entry : map.entrySet())</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>lambda表达式</strong></p>
-<pre><code class="java">map.forEach((key, value) -&gt; &#123;
-            System.out.println(key);
-            System.out.println(value);
-        &#125;);
-</code></pre>
-</li>
-<li><p><strong>Stream</strong></p>
-<pre><code class="java">map.entrySet().stream().forEach((entry) -&gt; &#123;
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
-        &#125;);
-// 多线程
-map.entrySet().parallelStream().forEach((entry) -&gt; &#123;
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
-        &#125;);
-</code></pre>
-</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><span class="line">   map.forEach((key, value) -&gt; &#123;</span><br><span class="line">               System.out.println(key);</span><br><span class="line">               System.out.println(value);</span><br><span class="line">           &#125;);</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> **Stream**</span><br><span class="line"></span><br><span class="line">   ```java</span><br><span class="line">   map.entrySet().stream().forEach((entry) -&gt; &#123;</span><br><span class="line">               System.out.println(entry.getKey());</span><br><span class="line">               System.out.println(entry.getValue());</span><br><span class="line">           &#125;);</span><br><span class="line">   <span class="comment">// 多线程</span></span><br><span class="line">   map.entrySet().parallelStream().forEach((entry) -&gt; &#123;</span><br><span class="line">               System.out.println(entry.getKey());</span><br><span class="line">               System.out.println(entry.getValue());</span><br><span class="line">           &#125;);</span><br><span class="line"></span><br><span class="line">### <span class="number">1.3</span><span class="number">.9</span> ConcurrentHashMap</span><br><span class="line"></span><br><span class="line">![Java8 ConcurrentHashMap 存储结构](/assets/Java基础梳理/java8_concurrenthashmap.png)</span><br><span class="line"></span><br><span class="line">如图是JDK1<span class="number">.8</span>以后，ConcurrentHashMap的底层原理</span><br><span class="line"></span><br><span class="line">相对应的，JDK1<span class="number">.7</span>及之前的实现，相当于把多个Node划分为一组，对组加锁</span><br><span class="line"></span><br><span class="line">因此<span class="number">1.8</span>之后加锁粒度更细，效率更高</span><br><span class="line"></span><br><span class="line"># 二、线程和进程 / JAVA同步</span><br><span class="line"></span><br><span class="line">## <span class="number">2.1</span> 定义和区别</span><br><span class="line"></span><br><span class="line">**进程：**进程是程序的一次执行过程，是系统运行程序的基本单位，是动态的。进程间是相互独立的</span><br><span class="line"></span><br><span class="line">**线程：**类似于进程，但比进程更小。一个进程在执行过程中可以产生多个线程。多个线程共享堆和方法区资源，但独占自己的程序计数器、虚拟机栈和本地方法栈。线程切换消耗的资源远小于进程切换消耗的资源。线程间可能存在相互影响</span><br><span class="line"></span><br><span class="line">## <span class="number">2.2</span> 线程模型</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 一对一</span><br><span class="line"><span class="number">2.</span> 一对多</span><br><span class="line"><span class="number">3.</span> 多对一</span><br><span class="line"></span><br><span class="line">## <span class="number">2.3</span> 线程独有三要素及必要性</span><br><span class="line"></span><br><span class="line">**程序计数器：**为了保证线程切换后能恢复到原来的执行位置</span><br><span class="line"></span><br><span class="line">**虚拟机栈/本地方法栈：**为了保证线程中局部变量不被别的线程访问到</span><br><span class="line"></span><br><span class="line">## <span class="number">2.4</span> 堆区和方法区</span><br><span class="line"></span><br><span class="line">**堆区：**存放新创建的对象</span><br><span class="line"></span><br><span class="line">**方法区：**存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据</span><br><span class="line"></span><br><span class="line">## <span class="number">2.5</span> 创建线程</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 继承Thread并重写run方法</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 实现Runnable接口并重写run方法</span><br><span class="line"><span class="number">3.</span> 实现Callable接口并重写run方法（这种方法可以拿到线程执行返回值）</span><br><span class="line"><span class="number">4.</span> ExecutorService线程池</span><br><span class="line"></span><br><span class="line">## <span class="number">2.6</span> 线程六状态</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 初始状态</span><br><span class="line"><span class="number">2.</span> 运行状态</span><br><span class="line"><span class="number">3.</span> 阻塞状态</span><br><span class="line"><span class="number">4.</span> 等待状态</span><br><span class="line"><span class="number">5.</span> 超时等待状态</span><br><span class="line"><span class="number">6.</span> 终止状态</span><br><span class="line"></span><br><span class="line">## <span class="number">2.7</span> 直接调用Thread的run方法</span><br><span class="line"></span><br><span class="line">不可直接调用，而是应该调用start方法</span><br><span class="line"></span><br><span class="line">start方法会启动一个线程，并使它进入就绪状态，之后当分配到时间片时就自动运行run方法</span><br><span class="line"></span><br><span class="line">但如果直接调用run方法，就相当于main线程里面调用的一个普通方法，不是新线程了</span><br><span class="line"></span><br><span class="line">## <span class="number">2.8</span> 并发和并行</span><br><span class="line"></span><br><span class="line">**并发：**两个及两个以上的作业在同一**时间段**内执行</span><br><span class="line"></span><br><span class="line">**并行：**两个及两个以上的作业在同一**时刻**内执行</span><br><span class="line"></span><br><span class="line">## <span class="number">2.9</span> 死锁</span><br><span class="line"></span><br><span class="line">### <span class="number">2.9</span><span class="number">.1</span> 死锁形成<span class="number">4</span>条件</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 互斥条件：该资源任意一个时刻只由一个线程占用</span><br><span class="line"><span class="number">2.</span> 请求与保持条件：一个线程因请求资源而阻塞时，对已获得的资源保持不放。</span><br><span class="line"><span class="number">3.</span> 不剥夺条件:线程已获得的资源在未使用完之前不能被其他线程强行剥夺，只有自己使用完毕后才释放资源。</span><br><span class="line"><span class="number">4.</span> 循环等待条件:若干线程之间形成一种头尾相接的循环等待资源关系。</span><br><span class="line"></span><br><span class="line">### <span class="number">2.9</span><span class="number">.2</span> 死锁预防</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 破坏申请并占有：一次性资源分配</span><br><span class="line"><span class="number">2.</span> 破坏不可剥夺：线程申请不到资源时，可以释放它已占有的资源</span><br><span class="line"><span class="number">3.</span> 破坏循环等待：给资源标顺序，按序申请分配资源，逆序释放资源</span><br><span class="line"></span><br><span class="line">## <span class="number">2.10</span> JAVA同步</span><br><span class="line"></span><br><span class="line">[java实现同步的<span class="number">5</span>种方式-CSDN博客](https:<span class="comment">//blog.csdn.net/l1994m/article/details/106236818)</span></span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> **实例锁：**sychronized关键字修饰普通方法，保证某个实例执行该方法的线程安全</span><br><span class="line"><span class="number">2.</span> **类锁：** synchroinzed关键字修饰静态方法，保证该类的所有实例执行该方法的线程安全</span><br><span class="line"><span class="number">3.</span> **代码块：**可以是<span class="keyword">synchronized</span>(Class)或<span class="keyword">synchronized</span>(<span class="built_in">this</span>)，前者锁类，保证同一个类不同实例执行代码块线程安全；后者锁实例</span><br><span class="line"><span class="number">4.</span> **<span class="keyword">volatile</span>：**保证了可见性、禁止了指令重排，修饰变量，注意：<span class="keyword">volatile</span>不保证线程安全 BV1CT411v7TM</span><br><span class="line"><span class="number">5.</span> **ReentrantLock**</span><br><span class="line"></span><br><span class="line"># 三、JVM</span><br><span class="line"></span><br><span class="line">## <span class="number">3.1</span> JVM内存区域</span><br><span class="line"></span><br><span class="line">![Java 运行时数据区域（JDK1<span class="number">.8</span> ）](/assets/Java基础梳理/java-runtime-data-areas-jdk1<span class="number">.8</span>.png)</span><br><span class="line"></span><br><span class="line">**线程共享：**堆、直接内存、元空间</span><br><span class="line"></span><br><span class="line">**线程私有：**虚拟机栈、本地方法栈、程序计数器</span><br><span class="line"></span><br><span class="line">### <span class="number">3.1</span><span class="number">.1</span> String的存储</span><br><span class="line"></span><br><span class="line">String是一种引用类型</span><br><span class="line"></span><br><span class="line">当用户直接给一个String变量赋值时，JVM会搜索字符串常量池，若有则直接返回地址，没有则在字符串常量池中新建并返回地址</span><br><span class="line"></span><br><span class="line">```java</span><br><span class="line"><span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line">System.out.println(str1 == str2); <span class="comment">// true，两个字符串指向同一个字符串常量。</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h3><span id="139-concurrenthashmap">1.3.9 ConcurrentHashMap</span></h3><p><img src="/assets/Java%E5%9F%BA%E7%A1%80%E6%A2%B3%E7%90%86/java8_concurrenthashmap.png" alt="Java8 ConcurrentHashMap 存储结构"></p>
-<p>如图是JDK1.8以后，ConcurrentHashMap的底层原理</p>
-<p>相对应的，JDK1.7及之前的实现，相当于把多个Node划分为一组，对组加锁</p>
-<p>因此1.8之后加锁粒度更细，效率更高</p>
-<h1><span id="二-线程和进程">二、线程和进程</span></h1><h2><span id="11-定义和区别">1.1 定义和区别</span></h2><p><strong>进程：</strong>进程是程序的一次执行过程，是系统运行程序的基本单位，是动态的。进程间是相互独立的</p>
-<p><strong>线程：</strong>类似于进程，但比进程更小。一个进程在执行过程中可以产生多个线程。多个线程共享堆和方法区资源，但独占自己的程序计数器、虚拟机栈和本地方法栈。线程切换消耗的资源远小于进程切换消耗的资源。线程间可能存在相互影响</p>
-<h2><span id="12-线程模型">1.2 线程模型</span></h2><ol>
-<li>一对一</li>
-<li>一对多</li>
-<li>多对一</li>
-</ol>
-<h2><span id="13-线程独有三要素及必要性">1.3 线程独有三要素及必要性</span></h2><p><strong>程序计数器：</strong>为了保证线程切换后能恢复到原来的执行位置</p>
-<p><strong>虚拟机栈&#x2F;本地方法栈：</strong>为了保证线程中局部变量不被别的线程访问到</p>
-<h2><span id="14-堆区和方法区">1.4 堆区和方法区</span></h2><p><strong>堆区：</strong>存放新创建的对象</p>
-<p><strong>方法区：</strong>存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据</p>
-<h2><span id="15-创建线程">1.5 创建线程</span></h2><ol>
-<li><p>继承Thread并重写run方法</p>
+<p>当用户使用new String(“”)时，JVM会搜索字符串常量池，若无则在字符串常量池新建，同时赋值字符串常量池中的对象的副本到堆内存，返回堆内存中对象的地址</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">str1</span> <span class="operator">=</span> <span class="string">&quot;1&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">str2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">System.out.println(str1 == str2); <span class="comment">// false， 一个指向常量池，另一个指向堆内存。</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="32-垃圾回收">3.2 垃圾回收</span></h2><p>堆是垃圾收集器管理的主要区域</p>
+<p>大对象直接进入老年代</p>
+<p>长期存活对象进入老年代</p>
+<ul>
+<li>一个对象每熬过一次垃圾回收，则岁数+1，当岁数大于某个阈值时，则会被放到老年代中</li>
+</ul>
+<h3><span id="321-死亡对象判断方法">3.2.1 死亡对象判断方法</span></h3><ul>
+<li><p><strong>引用计数法</strong></p>
+<p>以被引用次数作为判断对象死亡的依据，但很难解决循环引用的问题，因此基本不用</p>
 </li>
-<li><p>实现Runnable接口并重写run方法</p>
+<li><p><strong>可达性分析法</strong></p>
+<p>从一个根节点向下搜索，不在引用链上的对象就是垃圾对象</p>
+<p><strong>根节点的选择：</strong>虚拟机栈、本地方法栈中引用的对象；元空间中类静态属性、常量引用的对象等</p>
 </li>
-<li><p>实现Callable接口并重写run方法（这种方法可以拿到线程执行返回值）</p>
+</ul>
+<h3><span id="322-垃圾收集算法">3.2.2 垃圾收集算法</span></h3><ul>
+<li><p><strong>标记清除算法</strong></p>
+<p>存在问题：效率低、产生碎片空间</p>
 </li>
-<li><p>ExecutorService线程池</p>
+<li><p><strong>复制算法</strong></p>
+<p>每次只使用一半的空间，使用完了就把存活的对象复制到另外半片空间</p>
+<p>因为要复制所有存活的，所以适用于新生代</p>
 </li>
+<li><p><strong>标记整理算法</strong></p>
+<p>标记后，将存活的对象移到一起，同时清除剩下的空间</p>
+</li>
+<li><p><strong>分代收集算法</strong></p>
+<p>对于不同代，采用不同的垃圾收集算法</p>
+<p>对于新生代，存活周期短，适合使用复制算法</p>
+<p>对于老年代，存活周期长，适合使用标记整理算法</p>
+</li>
+</ul>
+<h3><span id="323-垃圾收集器">3.2.3 垃圾收集器</span></h3><ul>
+<li><p><strong>Serial收集器</strong></p>
+<p>单线程的收集器，进行垃圾回收时需要暂停所有的其它工作线程，直到其工作结束</p>
+</li>
+<li><p><strong>ParNew收集器</strong></p>
+<p>垃圾回收过程使用了多线程实现，其余与Serial相同</p>
+</li>
+<li><p><strong>Parallel Scavenge收集器</strong></p>
+<p>与ParNew收集器非常相似，Parallel Scavenge收集器追求最大化CPU吞吐量</p>
+</li>
+<li><p><strong>Serial Old收集器</strong></p>
+<p>Serial收集器的老年版本</p>
+</li>
+<li><p><strong>Parallel Old收集器</strong></p>
+<p>Parallel Scavenge收集器的老年版本</p>
+</li>
+<li><p><strong>CMS收集器</strong></p>
+<p>追求最小化用户线程停顿时间，实现了垃圾收集与用户线程的同时进行，是并发收集器</p>
+<p>CMS只回收老年代和永久代，不回收年轻代</p>
+<p><strong>原理</strong></p>
+<ul>
+<li><strong>初始标记：</strong>停止用户线程，寻找老年代中所有的GC Root对象和被年轻代中存活的对象所引用的老年代的对象</li>
+<li><strong>并发标记：</strong>开启用户线程，从第一步所标记的对象开始标记可达对象；期间如果有对象的引用发生改变，就将该对象的Card标记为Dirty</li>
+<li><strong>重新标记：</strong>停止用户线程，扫描Dirty Card的所有对象并进行可达性分析，对第二步遗漏的进行标记</li>
+<li><strong>并发清除：</strong>开启用户线程，对未标记区域进行清除</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ol>
+<li>对CPU资源敏感</li>
+<li>无法处理浮动垃圾</li>
+<li>使用标记-清除算法，产生大量碎片空间</li>
 </ol>
-<h2><span id="16-线程六状态">1.6 线程六状态</span></h2><ol>
-<li>初始状态</li>
-<li>运行状态</li>
-<li>阻塞状态</li>
-<li>等待状态</li>
-<li>超时等待状态</li>
-<li>终止状态</li>
-</ol>
-<h2><span id="17-直接调用thread的run方法">1.7 直接调用Thread的run方法</span></h2><p>不可直接调用，而是应该调用start方法</p>
-<p>start方法会启动一个线程，并使它进入就绪状态，之后当分配到时间片时就自动运行run方法</p>
-<p>但如果直接调用run方法，就相当于main线程里面调用的一个普通方法，不是新线程了</p>
-<h2><span id="18-并发和并行">1.8 并发和并行</span></h2><p><strong>并发：</strong>两个及两个以上的作业在同一<strong>时间段</strong>内执行</p>
-<p><strong>并行：</strong>两个及两个以上的作业在同一<strong>时刻</strong>内执行</p>
-<h2><span id="19-死锁">1.9 死锁</span></h2><h3><span id="191-死锁形成4条件">1.9.1 死锁形成4条件</span></h3><ol>
-<li>互斥条件：该资源任意一个时刻只由一个线程占用</li>
-<li>请求与保持条件：一个线程因请求资源而阻塞时，对已获得的资源保持不放。</li>
-<li>不剥夺条件:线程已获得的资源在未使用完之前不能被其他线程强行剥夺，只有自己使用完毕后才释放资源。</li>
-<li>循环等待条件:若干线程之间形成一种头尾相接的循环等待资源关系。</li>
-</ol>
-<h3><span id="192-死锁预防">1.9.2 死锁预防</span></h3><ol>
-<li>破坏申请并占有：一次性资源分配</li>
-<li>破坏不可剥夺：线程申请不到资源时，可以释放它已占有的资源</li>
-<li>破坏循环等待：给资源标顺序，按序申请分配资源，逆序释放资源</li>
+</li>
+<li><p><strong>G1收集器</strong></p>
+<p>将堆内存直接划分为多个大小相等的区域，每块区域可根据需要充当Eden，Survivor或老年代区域</p>
+<p>允许使用者设置最大容忍用户线程停顿时间，并自动计算在时间内能收集几个区域</p>
+<p><strong>原理</strong></p>
+<ul>
+<li><strong>初始标记</strong></li>
+<li><strong>并发标记</strong></li>
+<li><strong>最终标记：</strong>跟CMS的重新标记类似，只是范围更小</li>
+<li><strong>筛选回收：</strong>跟CMS的并发清除类似，只是范围更小</li>
+</ul>
+<p>相比于CMS，G1由于将堆划分为多个大小相等的区域，以区域为单位进行处理，因此在更大内存中有更好的表现</p>
+<p>G1采用标记-整理算法，不会产生很多碎片，且由于是对区域操作，效率影响不大</p>
+</li>
+</ul>
+<h1><span id="四-java程序执行过程">四、Java程序执行过程</span></h1><ol>
+<li><strong>编译：</strong>生成.class文件</li>
+<li><strong>装载字节码：</strong>通过类加载器将字节码文件加载到内存中</li>
+<li><strong>校验字节码</strong></li>
+<li><strong>解释字节码：</strong>把字节码解释成机器语言</li>
 </ol>
 <h2><span id="其它问题">其它问题</span></h2><ol>
 <li>线程退出CPU的四种情况</li>

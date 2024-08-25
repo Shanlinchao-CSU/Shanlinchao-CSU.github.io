@@ -166,7 +166,7 @@
                             <div class="author border-box">
                                 <span class="name">ShanLinChao</span>
                                 
-                                    <span class="author-badge">Lv1</span>
+                                    <span class="author-badge">Lv2</span>
                                 
                             </div>
                             <div class="meta-info border-box">
@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Aug 04 2024 17:05:27 GMT+0800">2024-08-04 17:05:27</span>
+                <span class="datetime" data-updated="Thu Aug 15 2024 00:25:20 GMT+0800">2024-08-15 00:25:20</span>
             </span>
         
 
@@ -325,7 +325,8 @@
 </li>
 </ul>
 </li>
-<li><a href="#7-%E9%99%84%E5%BD%95">7. 附录</a></li>
+<li><a href="#7-redis-lua">7. Redis Lua</a></li>
+<li><a href="#8-%E9%99%84%E5%BD%95">8. 附录</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -560,7 +561,12 @@
 <p>对于数据库，采用批量异步更新</p>
 <p><strong>适用：</strong>写多</p>
 <p><strong>缺点：</strong>容易造成数据丢失，数据不是强一致性的</p>
-<h1><span id="7-附录">7. 附录</span></h1><p><strong>参考博客：</strong></p>
+<h1><span id="7-redis-lua">7. Redis Lua</span></h1><p>Redis Lua是为了解决Redis多个命令原子性问题而出现的。Lua是一种古老的语言，常用语脚本的编写</p>
+<p><strong>基本语法：</strong>EVAL luascript numkeys key [key …] arg [arg …]</p>
+<p>在luascript中，执行命令可以使用redis.call或redis.pcall两种，前者遇错则报错并停止，后者遇错进行记录并继续运行</p>
+<p>例如，在redis命令行输入如下命令：EVAL “return redis.call(‘GET’,KEYS[1])” 1 hello，输出hello</p>
+<p><strong>缺点：</strong>单线程阻塞。Redis执行一个Lua脚本时，会阻塞其它所有命令，因此Redis中Lua脚本需要保证简单快速</p>
+<h1><span id="8-附录">8. 附录</span></h1><p><strong>参考博客：</strong></p>
 <p><a class="link" target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaolincoding/p/16370783.html">2 万字 + 20张图｜ 细说 Redis 九种数据类型和应用场景 - 小林coding - 博客园 (cnblogs.com)<i class="fas fa-external-link-alt"></i></a></p>
 <p><a class="link" target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2315477">3 万字 + 40 张图 ｜ Redis 常见面试题（2023 版本）-腾讯云开发者社区-腾讯云 (tencent.com)<i class="fas fa-external-link-alt"></i></a></p>
 
@@ -590,6 +596,22 @@
 
                 
                     <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2024/08/14/%E4%B8%8D%E7%9F%A5%E9%81%93%E8%B5%B7%E4%BB%80%E4%B9%88%E5%90%8D%E5%AD%97/"
+                                   title="不知道起什么名字"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">不知道起什么名字</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
                         
                         
                             <div class="next-post">

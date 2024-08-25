@@ -166,7 +166,7 @@
                             <div class="author border-box">
                                 <span class="name">ShanLinChao</span>
                                 
-                                    <span class="author-badge">Lv1</span>
+                                    <span class="author-badge">Lv2</span>
                                 
                             </div>
                             <div class="meta-info border-box">
@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Jul 09 2024 12:21:56 GMT+0800">2024-07-09 12:21:56</span>
+                <span class="datetime" data-updated="Fri Aug 16 2024 15:22:25 GMT+0800">2024-08-16 15:22:25</span>
             </span>
         
 
@@ -228,6 +228,29 @@
 <li><a href="#%E5%8C%BA%E5%88%AB">区别</a></li>
 </ul>
 </li>
+<li><a href="#spring-xml%E4%B8%89%E7%A7%8D%E5%88%9B%E5%BB%BAbean%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F">Spring XML三种创建Bean对象的方式</a><ul>
+<li><a href="#1-set%E6%96%B9%E6%B3%95">1. set方法</a></li>
+<li><a href="#2-%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95">2. 构造方法</a></li>
+<li><a href="#3-%E9%9D%99%E6%80%81%E5%B7%A5%E5%8E%82">3. 静态工厂</a></li>
+<li><a href="#4-%E5%AE%9E%E4%BE%8B%E5%B7%A5%E5%8E%82">4. 实例工厂</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9A%E5%88%B6bean">定制Bean</a><ul>
+<li><a href="#spring%E7%9A%84%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">Spring的单例模式</a></li>
+<li><a href="#%E6%B3%A8%E5%85%A5list">注入List</a></li>
+<li><a href="#%E5%8F%AF%E9%80%89%E6%B3%A8%E5%85%A5">可选注入</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%89%E6%96%B9bean">创建第三方Bean</a></li>
+<li><a href="#bean%E5%88%AB%E5%90%8D">Bean别名</a></li>
+<li><a href="#%E6%B3%A8%E5%85%A5%E9%85%8D%E7%BD%AE">注入配置</a><ul>
+<li><a href="#%E7%9B%B4%E6%8E%A5%E8%AF%BB%E5%8F%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">直接读取配置文件</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8bean%E6%8C%81%E6%9C%89%E6%89%80%E6%9C%89%E9%85%8D%E7%BD%AE">使用Bean持有所有配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#springboot%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5">SpringBoot依赖注入</a></li>
+<li><a href="#springboot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D">SpringBoot自动装配</a></li>
+<li><a href="#springboot%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B">SpringBoot启动流程</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -262,6 +285,50 @@
 <li><p><strong>调用情况不同</strong>：action生命周期中，拦截器可被多次调用，过滤器只会初始化一次</p>
 </li>
 </ol>
+<hr>
+<h1><span id="spring-xml三种创建bean对象的方式">Spring XML三种创建Bean对象的方式</span></h1><h2><span id="1-set方法">1. set方法</span></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userA&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.monkey.springboottemplate.common.entity.UserEntity&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 如果字段是引用类型,使用ref指向定义好的bean --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;nickname&quot;</span> <span class="attr">value</span>=<span class="string">&quot;xiaoxml&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;address&quot;</span> <span class="attr">value</span>=<span class="string">&quot;欧洲&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="2-构造方法">2. 构造方法</span></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userA&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.monkey.springboottemplate.common.entity.UserEntity&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;nickname&quot;</span> <span class="attr">value</span>=<span class="string">&quot;xiaoxml&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">name</span>=<span class="string">&quot;address&quot;</span> <span class="attr">value</span>=<span class="string">&quot;欧洲&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="3-静态工厂">3. 静态工厂</span></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userA&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.monkey.springboottemplate.common.entity.UserFactory&quot;</span> <span class="attr">factroy-method</span>=<span class="string">&quot;getUserA&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2><span id="4-实例工厂">4. 实例工厂</span></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userFactroy&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.monkey.springboottemplate.common.entity.UserFactory&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;user1&quot;</span> <span class="attr">factory-bean</span>=<span class="string">&quot;userFactory&quot;</span> <span class="attr">factory-method</span>=<span class="string">&quot;getUser&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1><span id="定制bean">定制Bean</span></h1><h2><span id="spring的单例模式">Spring的单例模式</span></h2><p>Spring创建的Bean默认单例模式，但是通过创建Bean时添加Scope注解：*@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)*可以使Bean为原型模式</p>
+<h2><span id="注入list">注入List</span></h2><p>当自动注入的是某个接口泛型的List时，Spring会将所有的实现类Bean添加到List中，要指定顺序可以在实现类上使用@Order(1)来实现</p>
+<h2><span id="可选注入">可选注入</span></h2><p>@Autowired(required&#x3D;false)</p>
+<p>User user&#x3D;defaultUser;</p>
+<h2><span id="创建第三方bean">创建第三方Bean</span></h2><p>当我们想将一个第三方提供的类注册为Bean时，可以在被@Configuration注解的类中，写一个工厂方法并用@Bean注解</p>
+<p>由于Spring对@Bean注解的方法只会执行一次，因此也是单例的</p>
+<h2><span id="bean别名">Bean别名</span></h2><p>@Bean(name)</p>
+<p>或</p>
+<p>@Bean</p>
+<p>@Qualifier(name)</p>
+<h2><span id="注入配置">注入配置</span></h2><h3><span id="直接读取配置文件">直接读取配置文件</span></h3><p>在类上打上@PropertySource(“配置文件路径”)</p>
+<p>在字段上或参数前打上@Value(“${配置文件的key:默认值}”)，可以自动给字段、参数赋配置文件中的value，如果配置文件中没有那么就用默认值</p>
+<h3><span id="使用bean持有所有配置">使用Bean持有所有配置</span></h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SmtpConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;smtp.host&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String host;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value(&quot;$&#123;smtp.port:25&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> port;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getHost</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> host;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getPort</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> port;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用#{smtpConfig.host}即可获取配置信息</p>
+<hr>
+<h1><span id="springboot依赖注入">SpringBoot依赖注入</span></h1><ol>
+<li>成员变量注入(直接在字段上加上@Autowired)</li>
+<li>构造函数注入(使用lombok自动生成构造函数，需要使用@RequiredArgsConstructor注解，该注解只会对final属性生成构造函数)</li>
+<li>setter注入</li>
+</ol>
+<p>当遭遇依赖注入的接口拥有多个实现类时，SpringBoot会根据：bytype→byname进行匹配注入。若没有根据name匹配到，此时会报错</p>
+<p><strong>解决方法：</strong>使用@Qualifier指定name，需要注意在构造函数注入中，该注解需要打在构造函数参数中，若使用lombok则只能单独将需要注入的字段设置非final并采用成员变量注入，这样就能打上@Qualifier了</p>
+<hr>
+<h1><span id="springboot自动装配">SpringBoot自动装配</span></h1><p>有了SpringBoot的自动装配，我们可以直接在pom.xml导入外部包的starter，然后什么都不用做，就可以直接在SpringBoot中使用了。这些starter能被自动配置到SpringBoot中，依靠的就是自动装配功能</p>
+<ul>
+<li>@SpringBootApplication中包含了@EnableAutoConfiguration</li>
+<li>@EnableAutoConfiguration引入了AutoConfigurationImportSelector类</li>
+<li>每个starter都会在SpringBoot约定的路径保存一个配置文件spring.factories，这个文件中key为EnableAutoConfiguration对应的value描述了配置类的全限定名</li>
+<li>找到配置类并加载，根据配置类生成Bean</li>
+<li>需要注意的是，并不是所有配置都要被加载，SpringBoot会通过条件注解进行筛选(Spring提供的一种注解，用于在适当的情况下才向Spring IOC容器注册指定的Bean)</li>
+</ul>
+<hr>
+<h1><span id="springboot启动流程">SpringBoot启动流程</span></h1><p><img src="/assets/SpringBoot%E6%9D%82%E8%AE%B0/image-20240816152213506.png" alt="image-20240816152213506"></p>
 
                     
                 </div>

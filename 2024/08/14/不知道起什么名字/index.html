@@ -9,7 +9,7 @@
     
     <title>
         
-            实习面试记录 |
+            不知道起什么名字 |
         
         Keep Theme
     </title>
@@ -151,7 +151,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        实习面试记录
+                        不知道起什么名字
                     </div>
                 
 
@@ -179,29 +179,17 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-07-18 23:13:36</span>
+                <span class="datetime">2024-08-14 13:49:37</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Aug 08 2024 22:09:59 GMT+0800">2024-08-08 22:09:59</span>
+                <span class="datetime" data-updated="Thu Aug 15 2024 00:25:29 GMT+0800">2024-08-15 00:25:29</span>
             </span>
         
 
         
 
-        
-            <span class="post-tag meta-info-item border-box">
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java/">Java</a></li>
-                        
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a></li>
-                        
-                    
-                </ul>
-            </span>
         
 
         
@@ -222,206 +210,30 @@
                     
 
                     
-                         <!-- toc -->
-
-<ul>
-<li><a href="#momenta">Momenta</a><ul>
-<li><a href="#java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2">Java后端开发（一面）</a></li>
-</ul>
-</li>
-<li><a href="#%E8%85%BE%E8%AE%AF%E9%87%91%E8%9E%8D%E7%A7%91%E6%8A%80">腾讯金融科技</a><ul>
-<li><a href="#java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91%E4%B8%80%E9%9D%A2-1">Java后端开发（一面）</a></li>
-</ul>
-</li>
-<li><a href="#%E4%B8%87%E5%BE%97%E6%95%B0%E6%8D%AE">万得数据</a><ul>
-<li><a href="#java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91a%E9%9D%A2">Java后端开发（A面）</a></li>
-<li><a href="#java%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91b%E9%9D%A2">Java后端开发（B面）</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-
-<h1><span id="momenta">Momenta</span></h1><h3><span id="java后端开发一面">Java后端开发（一面）</span></h3><ol>
-<li><p><strong>介绍一下Set和List，说明它们的区别</strong></p>
-</li>
-<li><p><strong>介绍一下HashMap和HashTable的区别</strong></p>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">HashMap</th>
-<th align="center">HashTable</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">线程安全</td>
-<td align="center">否</td>
-<td align="center">是</td>
-</tr>
-<tr>
-<td align="center">效率</td>
-<td align="center">高</td>
-<td align="center">低</td>
-</tr>
-<tr>
-<td align="center">实现</td>
-<td align="center">继承AbstractMap</td>
-<td align="center">继承Dictionary</td>
-</tr>
-<tr>
-<td align="center">NULL</td>
-<td align="center">可以用NULL作为键值</td>
-<td align="center">不可以使用NULL作为键值</td>
-</tr>
-<tr>
-<td align="center">扩容</td>
-<td align="center">初始容量为16</td>
-<td align="center">初始容量为11</td>
-</tr>
-<tr>
-<td align="center">迭代器容错</td>
-<td align="center">快速失败</td>
-<td align="center">非快速失败</td>
-</tr>
-</tbody></table>
-<ol start="3">
-<li><strong>HashMap有序吗？在HashMap的子类中，哪个是有序的？</strong></li>
-<li><strong>分别介绍一下List和Map的遍历方式</strong></li>
-<li><strong>Java实现多线程的方式</strong></li>
-<li><strong>解释下线程进程区别</strong></li>
-</ol>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>进程</th>
-<th>线程</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>根本区别</td>
-<td>操作系统资源分配基本单位</td>
-<td>处理器任务调度和执行的基本单位</td>
-</tr>
-<tr>
-<td>资源开销</td>
-<td>每个进程都有独立的代码和数据空间，程序之间的切换会有较大的开销</td>
-<td>同一类线程共享代码和数据空间，每个线程都有自己独立的运行栈和程序计数器，线程之间切换的开销小</td>
-</tr>
-<tr>
-<td>包含关系</td>
-<td>一个进程可以包含多个线程</td>
-<td>&#x2F;</td>
-</tr>
-<tr>
-<td>内存分配</td>
-<td>地址空间和资源相互独立</td>
-<td>同进程的线程共享本进程的地址空间和资源</td>
-</tr>
-<tr>
-<td>影响关系</td>
-<td>崩溃后，在保护模式下不会对其它进程影响</td>
-<td>崩溃后，整个进程都崩溃</td>
-</tr>
-<tr>
-<td>执行过程</td>
-<td>每个独立的进程有程序运行的入口、顺序执行序列和程序出口</td>
-<td>线程不能独立执行，必须依存在应用程序中，由应用程序提供多个线程执行控制，两者均可并发执行</td>
-</tr>
-</tbody></table>
-<ol start="8">
-<li><strong>用过什么数据库（MySQL，ORACLE，SQLServer，Redis，MongoDB），简单介绍下Redis</strong></li>
-<li><strong>知道哪些排序算法（冒泡，堆，桶，快排，分治），选一个解释一下</strong></li>
-<li><strong>SpringBoot的拦截器用过吗？具体怎么实现？</strong></li>
-</ol>
+                         <h3><span id="为什么主键通常选用自增id">为什么主键通常选用自增ID?</span></h3><p><strong>主要是为了最大限度防止页分裂：</strong></p>
+<p>​	InnoDB采用B+树作为存储索引的数据结构。B+树的叶子结点采用双向链表<strong>按关键字顺序</strong>相连接，同时存储数据，在查找时，只需通过关键字就能快速定位数据位置。</p>
+<p>​	页是InnoDB磁盘管理的最小单位，为了确保数据按照关键字顺序排列，每一次插入都有可能导致页分裂。使用自增ID插入能最大限度防止页分裂</p>
 <hr>
-<h1><span id="腾讯金融科技">腾讯金融科技</span></h1><h3><span id="java后端开发一面">Java后端开发（一面）</span></h3><ol>
-<li><p><strong>常见的I&#x2F;O模型了解吗？</strong></p>
-<ul>
-<li><p><strong>BIO：</strong></p>
-<p><strong>追问：</strong>说说常见的BIO模型的应用（Reader,Writer,InputStream,OutputStream等都是BIO的实现）</p>
+<h3><span id="设计日志表">设计日志表</span></h3><p>需要充分考虑日志表的通用性</p>
+<ol>
+<li><p>日志概要表</p>
+<p>主要有日志ID，表名(表示这条日志针对哪张表)，时间，业务名称，创建人等基本信息</p>
 </li>
-<li><p><strong>NIO：</strong></p>
-<p>Java NIO使用了多路复用技术，提供了三个组件：Channel，Buffer和Selector</p>
-<p><strong>Channel</strong>就是通道，通道连接着客户端和服务端，用来传递数据，因此通常一个通道表示一个连接；<strong>Buffer</strong>表示缓冲区，用户从Channel中读数据，或往里面写数据都要通过Buffer实现。传统BIO基于字节流，读写都必须按顺序进行，但是Buffer提供了一系列方法，使用户可以自行移动读写下标；<strong>Selector</strong>是选择器，当检测到Channel事件时（Java NIO只定义了四个事件：SelectionKey.OP_CONNECT，SelectionKey.OP_ACCEPT，SelectionKey.OP_READ，SelectionKey.OP_WRITE），对这个Channel进行处理</p>
+<li><p>操作表</p>
+<p>以日志ID为外键，主要记录了日志概要表中对应记录是什么操作(CRUD这些)</p>
 </li>
-<li><p><strong>AIO：</strong></p>
-<p>基于事件回调机制，应用程序发起 I&#x2F;O 操作后，内核负责数据传输过程，完成后通知应用程序。应用程序无需等待数据传输，可执行其他任务</p>
-</li>
-</ul>
-</li>
-<li><p><strong>同步&#x2F;异步 和 阻塞&#x2F;非阻塞 的区别</strong></p>
-<p>同步&#x2F;异步强调发出请求后，是否需要等待执行结果才能执行后续操作</p>
-<p>阻塞&#x2F;非阻塞强调等待消息通知时的状态，阻塞表示调用结果返回之前当前线程被挂起，而非阻塞则得到结果之前不会阻塞</p>
-</li>
-<li><p><strong>多路复用的“多路”指的是什么？</strong></p>
-<p>指同时监听的多个I&#x2F;O事件</p>
-</li>
-<li><p><strong>Netty具体封装了哪些复杂的操作？</strong></p>
-<p>Netty主要对NIO基本的Channel，Selector和Buffer进行了更高层的封装，屏蔽了底层的复杂性</p>
-<p>Netty提供了对多种协议的很好支持，封装了对多协议支持的复杂性</p>
-<p>Netty封装了三种Reactor模型：单线程单Reactor，多线程单Reactor，多线程多Reactor</p>
-</li>
-<li><p><strong>谈谈你对ZooKeeper的理解</strong></p>
-<p>保证分布式数据一致性的解决方案，可用于统一配置管理、命名服务，分布式锁，集群服务等。</p>
-<p>zk保证了一致性和分区容错性，牺牲了部分可用性</p>
-</li>
-<li><p><strong>说明Redis的选举机制，解释为什么是过半投票</strong></p>
-<p>过半机制为了防止脑裂</p>
-</li>
-<li><p><strong>Redis集群怎么确定主节点挂了？如何选举新节点？如何保证最新数据？</strong></p>
-<p><strong>确定主节点宕机：</strong>定期PING，若不通，则询问其它哨兵，当过半数哨兵认为宕机，则通过Raft算法选出领头哨兵进行故障恢复</p>
-<p><strong>选举：</strong><a class="link" target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1751001">一文搞懂 Redis 的三种集群方案-腾讯云开发者社区-腾讯云 (tencent.com)<i class="fas fa-external-link-alt"></i></a></p>
-<p><strong>保证最新数据：</strong>根据复制偏移量确定</p>
+<li><p>对象表</p>
+<p>以日志ID为外键，主要记录了该条日志针对哪个字段操作，包括字段名，字段类型以及一些常规字段</p>
 </li>
 </ol>
+<p><img src="/assets/%E4%B8%8D%E7%9F%A5%E9%81%93%E8%B5%B7%E4%BB%80%E4%B9%88%E5%90%8D%E5%AD%97/275d1db5a186a5ed2d08d853417c90c2.png" alt="img"></p>
 <hr>
-<h1><span id="万得数据">万得数据</span></h1><h2><span id="java后端开发a面">Java后端开发（A面）</span></h2><ol>
-<li><strong>进程通信方式</strong><ul>
-<li><p><strong>管道：</strong>半双工，有特定的读端和写端</p>
-<ul>
-<li><p>无名管道(pipe)：只允许有亲缘关系的进程之间使用</p>
-</li>
-<li><p>命名管道(fifo)：允许任何进程之间使用</p>
-</li>
-</ul>
-</li>
-<li><p><strong>消息队列：</strong>一个消息的链表，是一系列保存在内核中消息的列表。用户进程可以向消息队列添加消息，也可以读取消息。消息队列与管道通信相比，其优势是对每个消息指定特定的消息类型，接收的时候不需要按照队列次序，而是可以根据自定义条件接收特定类型的消息</p>
-</li>
-<li><p><strong>共享内存：</strong>效率高</p>
-</li>
-<li><p><strong>信号量</strong></p>
-</li>
-</ul>
-</li>
-</ol>
-<h2><span id="java后端开发b面">Java后端开发（B面）</span></h2><ol>
-<li><p><strong>Java特性？解释一下封装</strong></p>
-<p><strong>封装：</strong>利用抽象将数据和对数据的操作封装在一起，使其成为一个整体。隐藏内部实现细节，只保留一些对外的接口供调用</p>
-<p><strong>继承：</strong>使子类可以拥有父类的属性、方法</p>
-<p><strong>多态：</strong>程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定</p>
-</li>
-<li><p><strong>String是否是引用类型</strong></p>
-</li>
-<li><p><strong>ArrayList和HashMap的扩容机制？</strong></p>
-</li>
-<li><p><strong>线程生命周期</strong></p>
-</li>
-<li><p><strong>死锁必要条件、避免</strong></p>
-</li>
-<li><p><strong>介绍一下控制反转，以及SpringBoot中的控制反转</strong></p>
-</li>
-<li><p><strong>SpringBoot的@Autowired是否可以自动注入一个List</strong></p>
-</li>
-<li><p><strong>了解哪些设计模式？介绍一下代理模式和观察者模式</strong></p>
-</li>
-<li><p><strong>MyBatis中的#和$的区别</strong></p>
-</li>
-<li><p><strong>场景题：针对MySQL，极大数据量，需要长时间稳定运行，可以作出什么优化？</strong></p>
-</li>
-</ol>
+<h3><span id="高并发的解决方案">高并发的解决方案</span></h3><p>微服务、负载均衡、分布式缓存、异步、消息队列、数据库优化</p>
+<hr>
+<h3><span id="list并发">List并发</span></h3><p>线程安全的List有三种：</p>
+<p>Vector：底层采用数组实现，操作均加锁，效率低</p>
+<p>Collections.synchronizedList(List list)：将List转成线程安全，效率低</p>
+<p>CopyOnWriteArrayList：写时复制列表，读操作不加锁，写操作加锁</p>
 
                     
                 </div>
@@ -430,18 +242,6 @@
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
-                        
-                            <ul class="post-tags-box border-box">
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java/">Java</a>
-                                    </li>
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E9%9D%A2%E8%AF%95/">面试</a>
-                                    </li>
-                                
-                            </ul>
                         
                     </div>
                     <div>
@@ -457,14 +257,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/07/19/RPC%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"
-                                   title="RPC框架开发笔记"
+                                   href="/2024/08/23/Java%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0%E6%95%B4%E7%90%86/"
+                                   title="Java常用功能实现整理"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">RPC框架开发笔记</span>
+                                        <span class="post-nav-title-item text-ellipsis">Java常用功能实现整理</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
                                 </a>
@@ -474,11 +274,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/09/Linux(Ubuntu)%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/"
-                                   title="Linux(Ubuntu)使用笔记"
+                                   href="/2024/07/29/Redis%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0/"
+                                   title="Redis复习笔记"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Linux(Ubuntu)使用笔记</span>
+                                        <span class="post-nav-title-item text-ellipsis">Redis复习笔记</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">

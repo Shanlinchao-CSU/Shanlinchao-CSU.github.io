@@ -166,7 +166,7 @@
                             <div class="author border-box">
                                 <span class="name">ShanLinChao</span>
                                 
-                                    <span class="author-badge">Lv1</span>
+                                    <span class="author-badge">Lv2</span>
                                 
                             </div>
                             <div class="meta-info border-box">
@@ -184,7 +184,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Fri Jul 19 2024 20:34:25 GMT+0800">2024-07-19 20:34:25</span>
+                <span class="datetime" data-updated="Fri Aug 09 2024 17:26:11 GMT+0800">2024-08-09 17:26:11</span>
             </span>
         
 
@@ -222,34 +222,40 @@
                          <!-- toc-->
 
 <p><strong>本项目为自主开发的一个RPC框架，技术栈涉及SpringBoot+Netty+Redis&#x2F;Zookeeper。整体使用SPI机制进行配置。基于SPI机制，项目实现了注册中心，负载均衡，序列化，容错等扩展功能，笔记按照功能模块进行整理</strong></p>
-<h2><span id="一-spi模块">一、SPI模块</span></h2><p>API机制中，接口的定义在服务提供端，服务调用端只能按照服务提供者提供的接口进行调用。但SPI机制中，服务接口由调用端定义，服务提供端根据接口进行实现。调用端在配置文件中指定实现类，框架在启动时自动加载实现类，后续需要时直接取出即可</p>
+<h1><span id="一-spi模块">一、SPI模块</span></h1><p>API机制中，接口的定义在服务提供端，服务调用端只能按照服务提供者提供的接口进行调用。但SPI机制中，服务接口由调用端定义，服务提供端根据接口进行实现。调用端在配置文件中指定实现类，框架在启动时自动加载实现类，后续需要时直接取出即可</p>
 <p><img src="/assets/RPC%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/image-20240719142121411.png" alt="image-20240719142121411"></p>
 <p>如上图所示，以负载均衡为例：</p>
 <p>配置文件名即接口类名，因此需要加载时，直接根据接口类（org.xhystudy.rpc.router.LoadBalancer）的类名就能找到配置文件。在配置文件中，类似键值对的方式进行配置。当加载完成后，即可通过等号左边的key进行具体实现的获取；等号右边即集体实现类的类名，我们通过这个类名找到具体实现类，并将它加载到缓存中</p>
-<h3><span id="11-spi初始化时机">1.1 SPI初始化时机</span></h3><p>SPI初始化，即将各接口的各实现找到并加载进缓存中，供后续需要使用时获取</p>
+<h2><span id="11-spi初始化时机">1.1 SPI初始化时机</span></h2><p>SPI初始化，即将各接口的各实现找到并加载进缓存中，供后续需要使用时获取</p>
 <ul>
 <li>创建ConsumerPostProcessor类实现InitializingBean接口，实现其中afterPropertiesSet()方法，该方法触发时机为ConsumerPostProcessor类的属性值被填充完成后，在该方法中使用各个接口的工厂类进行初始化加载</li>
 <li><strong>工厂类</strong>：一般拥有两个方法：get和init，get方法用于获取该接口的某个具体实现，因此拥有String类型的参数，该参数就是前文说的key，init方法就是通过接口，加载该接口的所有实现</li>
 <li>类ConsumerPostProcessor需要被加载为Bean，项目中的处理方案是在EnableProviderRpc注解上用@Import导入该类，并在服务端启动类上打上该注解，实现该类的隐式装配</li>
 </ul>
-<h3><span id="12-从缓存中获取具体实现">1.2 从缓存中获取具体实现</span></h3><p>在1.1也提到过，直接调用工厂类的get方法即可</p>
+<h2><span id="12-从缓存中获取具体实现">1.2 从缓存中获取具体实现</span></h2><p>在1.1也提到过，直接调用工厂类的get方法即可</p>
 <hr>
-<h2><span id="二-服务注册模块">二、服务注册模块</span></h2><ul>
+<h1><span id="二-服务注册模块">二、服务注册模块</span></h1><ul>
 <li>在具体服务实现类打上@RpcService标签</li>
 <li>创建类ProviderPostProcessor实现BeanPostProcessor接口并实现其中postProcessBeforeInitialization方法，在该方法中我们通过SPI获取注册中心，并通过@RpcService注解筛选出服务具体实现类，进行注册</li>
 </ul>
 <hr>
-<h2><span id="三-服务发现模块">三、服务发现模块</span></h2><p>依旧是ConsumerPostProcessor类，实现BeanPostProcessor接口，实现其中postProcessAfterInitialization(Object bean, String beanName)方法，每当有一个Bean被加载完成之后，该Bean的信息就会作为参数，调用该方法</p>
+<h1><span id="三-服务发现模块">三、服务发现模块</span></h1><p>依旧是ConsumerPostProcessor类，实现BeanPostProcessor接口，实现其中postProcessAfterInitialization(Object bean, String beanName)方法，每当有一个Bean被加载完成之后，该Bean的信息就会作为参数，调用该方法</p>
 <p>我们在Controller中的service属性上打上@RpcReference注解，并在postProcessAfterInitialization方法中通过注解去筛选Controller中的service，创建JDK动态代理对象并用它替换对应的service，这样在Controller中就实现了调用动态代理对象的方法，且用户无法察觉</p>
 <hr>
-<h2><span id="四-负载均衡模块">四、负载均衡模块</span></h2><ul>
+<h1><span id="四-负载均衡模块">四、负载均衡模块</span></h1><ul>
 <li>一致性哈希算法</li>
 <li>轮询算法</li>
 </ul>
 <hr>
-<h2><span id="五-序列化模块">五、序列化模块</span></h2><h3><span id="51-编码和解码">5.1 编码和解码</span></h3><p><img src="/assets/RPC%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/image-20240719171908628.png" alt="image-20240719171908628"></p>
+<h1><span id="五-序列化模块">五、序列化模块</span></h1><h2><span id="51-编码和解码">5.1 编码和解码</span></h2><p><img src="/assets/RPC%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/image-20240719171908628.png" alt="image-20240719171908628"></p>
 <p>如图所示，是项目自定义的请求结构，按照该结构进行编码和解码。该结构定义了序列化方式的长度和请求体长度，根据长度可判断接受请求时是否发生粘包半包，从而进行处理</p>
-<h3><span id="52-序列化方式">5.2 序列化方式</span></h3><ul>
+<h2><span id="52-粘包半包问题的解决方案">5.2 粘包半包问题的解决方案</span></h2><ul>
+<li><strong>规定请求的长度，发送请求时如果未达到该长度则进行填充：</strong>Netty提供了FixedLengthFrameDecoder进行实现，但是Netty未提供编码器，因此编码器需要自行继承MessageToByteEncoder进行实现</li>
+<li><strong>规定分隔符：</strong>Netty提供了解码器LineBasedFrameDecoder与DelimiterBasedFrameDecoder，编码器同样自行实现</li>
+<li><strong>在生成的数据包中添加长度信息，指定数据包长度：</strong>Netty提供了LengthFieldBasedFrameDecoder与LengthFieldPrepender，前者是解码器，可指定长度数据所占空间、在请求中的偏移等，后者相当于编码器，可以自动计算数据包长度，并将长度置于请求最前面</li>
+<li><strong>自行实现：</strong>继承MessageToByteEncoder和ByteToMessageDecoder</li>
+</ul>
+<h2><span id="53-序列化方式">5.3 序列化方式</span></h2><ul>
 <li>Hessian序列化（二进制，体积小，可读性差）</li>
 <li>json序列化（体积大，可读性好）</li>
 </ul>
